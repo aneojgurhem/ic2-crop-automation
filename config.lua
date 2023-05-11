@@ -31,7 +31,7 @@ local config = {
     -- Keep crops that are not the recognized target crop during autoSpread and autoStat
     keepMutations = false,
     -- Whether or not to stat-up crops during autoTier (Very Slow)
-    statwhileTiering = false,
+    statWhileTiering = false,
 
     -- NOTE: GROWTH IS CAPPED AT 21, ANY HIGHER IS RECOGNIZED AS A WEED
 

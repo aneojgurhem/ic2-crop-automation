@@ -22,7 +22,7 @@ local function updateLowest()
     local farm = database.getFarm()
 
     -- Find lowest tier slot.
-    for slot=1, config.farmArea, 2 do
+    for slot=1, config.workingFarmArea, 2 do
         local crop = farm[slot]
         if crop == nil then
             lowestTierSlot = slot
@@ -38,8 +38,8 @@ local function updateLowest()
 
 
     -- Find lowest stats slot amongst the lowest tier crops
-    if config.statwhileTiering then
-        for slot=1, config.farmArea, 2 do
+    if config.statWhileTiering then
+        for slot=1, config.workingFarmArea, 2 do
             local crop = farm[slot]
             if crop ~= nil then
                 if crop.tier == lowestTier then
@@ -60,7 +60,7 @@ local function findSuitableFarmSlot(crop)
     -- if the return value > 0, then it's a valid crop slot
     if crop.tier > lowestTier then
         return lowestTierSlot
-    elseif (crop.tier == lowestTier and config.statwhileTiering) then
+    elseif (crop.tier == lowestTier and config.statWhileTiering) then
         if crop.gr + crop.ga - crop.re > lowestStat then
             return lowestStatSlot
         end
@@ -127,7 +127,7 @@ end
 -- =================== TIERING ======================
 
 local function tierOnce()
-    for slot=1, config.farmArea, 1 do
+    for slot=1, config.workingFarmArea, 1 do
 
         -- Terminal Condition
         breedRound = breedRound + 1

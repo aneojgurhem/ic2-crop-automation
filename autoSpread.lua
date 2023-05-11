@@ -14,7 +14,7 @@ local targetCrop
 local function FindEmpty()
     local farm = database.getFarm()
 
-    for slot=1, config.farmArea, 2 do
+    for slot=1, config.workingFarmArea, 2 do
         local crop = farm[slot]
         if crop == 'empty' then
             emptySlot = slot
@@ -92,7 +92,7 @@ end
 -- ====================== SPREADING ======================
 
 local function spreadOnce()
-    for slot=1, config.farmArea, 1 do
+    for slot=1, config.workingFarmArea, 1 do
 
         -- Terminal Condition
         if #database.getStorage() >= 81 then
