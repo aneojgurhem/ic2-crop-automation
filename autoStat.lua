@@ -21,7 +21,7 @@ local function updateLowest()
         local crop = farm[slot]
 
         if crop ~= nil then
-            if (crop.name == 'crop') or (crop.name == 'air') then
+            if crop.name == 'crop' then
                 lowestStatSlot = slot
                 break
             else
@@ -92,11 +92,11 @@ end
 
 
 local function checkParent(slot, crop)
-    if crop.name == 'air' then
-        database.updateFarm(slot, 'air')
-        updateLowest()
+    -- if crop.name == 'air' then
+    --     database.updateFarm(slot, 'air')
+    --     updateLowest()
 
-    elseif crop.isCrop and isWeed(crop) then
+    if crop.isCrop and isWeed(crop) then
         action.deweed()
         database.updateFarm(slot, 'crop')
         updateLowest()
