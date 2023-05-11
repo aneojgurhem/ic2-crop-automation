@@ -114,7 +114,6 @@ end
 
 local function checkParent(slot, crop)
     if crop.name == "air" then
-        robot.swingDown()
         database.updateFarm(slot, nil)
         updateLowest()
 
@@ -149,7 +148,7 @@ local function tierOnce()
         gps.go(posUtil.farmToGlobal(slot))
         local crop = scanner.scan()
 
-        if (slot % 2 == 0) then
+        if slot % 2 == 0 then
             checkChildren(slot, crop)
         else
             checkParent(slot, crop)

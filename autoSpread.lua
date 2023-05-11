@@ -16,7 +16,7 @@ local function FindEmpty()
 
     for slot=1, config.farmArea, 2 do
         local crop = farm[slot]
-        if crop ~= nil then
+        if crop == 'empty' then
             emptySlot = slot
             return true
         end
@@ -81,12 +81,11 @@ end
 
 local function checkParent(slot, crop)
     if crop.name == "air" then
-        robot.swingDown()
-        database.updateFarm(slot, nil)
+        database.updateFarm(slot, 'empty')
 
     elseif crop.isCrop and isWeed(crop) then
         action.deweed()
-        database.updateFarm(slot, nil)
+        database.updateFarm(slot, 'empty')
     end
 end
 
@@ -106,7 +105,7 @@ local function spreadOnce()
         gps.go(posUtil.farmToGlobal(slot))
         local crop = scanner.scan()
 
-        if (slot % 2 == 0) then
+        if slot % 2 == 0 then
             checkChildren(slot, crop)
         else
             checkParent(slot, crop)

@@ -19,6 +19,7 @@ local function updateLowest()
 
     for slot=1, config.farmArea, 2 do
         local crop = farm[slot]
+
         if crop ~= nil then
             if crop.name == 'crop' then
                 lowestStatSlot = slot
@@ -92,13 +93,12 @@ end
 
 local function checkParent(slot, crop)
     if crop.name == "air" then
-        robot.swingDown()
-        database.updateFarm(slot, nil)
+        database.updateFarm(slot, 'crop')
         updateLowest()
 
     elseif crop.isCrop and isWeed(crop) then
         action.deweed()
-        database.updateFarm(slot, nil)
+        database.updateFarm(slot, 'crop')
         updateLowest()
     end
 end
@@ -116,15 +116,15 @@ local function statOnce()
         end
 
         -- Scan
-        gps.go(posUtil.farmToGlobal(slot))
+        gps.go(posUtil.slotToPos(slot))
         local crop = scanner.scan()
 
-        if (slot % 2 == 0) then
+        if slot % 2 == 0 then
             checkChildren(slot, crop)
         else
             checkParent(slot, crop)
         end
-        
+
         if action.needCharge() then
             action.charge()
         end

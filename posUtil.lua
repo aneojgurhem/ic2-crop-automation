@@ -1,26 +1,39 @@
 local config = require("config")
 
+-- WORKING FARM SLOT MAP
+--  _________________
+-- |06 07 18 19 30 31|
+-- |05 08 17 20 29 32|
+-- |04 09 16 21 28 33|
+-- |03 10 15 22 27 34|
+-- |02 11 14 23 26 35|
+-- |01 12 13 24 25 36|
+--  ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
-local function posToSlot(size, pos)
-    local lastColNum
+local function posToSlot(farmSize, pos)
+    local Row
+
     if pos[1] % 2 == 1 then
-        lastColNum = pos[2] + 1
+        Row = farmSize - pos[2] + 1
     else
-        lastColNum = size - pos[2]
+        Row = pos[2]
     end
-    return (pos[1] - 1) * size + lastColNum
+
+    return (-pos[1])*farmSize + Row
 end
 
 
-local function slotToPos(size, slot)
-    local x = (slot - 1) // size + 1
+local function slotToPos(farmSize, slot)
+    local x = (slot - 1) // farmSize
+    local Row = (slot - 1) % farmSize
     local y
-    local lastColNum = (slot - 1) % size
+
     if x % 2 == 1 then
-        y = lastColNum
+        y = Row + 1
     else
-        y = size - lastColNum - 1
+        y = farmSize - Row
     end
+
     return {x, y}
 end
 

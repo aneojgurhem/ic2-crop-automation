@@ -99,17 +99,19 @@ To run without cleanup for some reason, type ANYTHING after the program name. If
 
 ## Thanks
 
-I DID NOT WRITE THE ORIGINAL CODE. My repo is a fork from https://github.com/huchenlei/auto-crossbreeding/tree/improve_autocrossbreed which was originally authored by huchenlei and improved by xyqyear. Huge props to them for getting this off the ground and allowing me to take it further.
+My repo is a fork from https://github.com/huchenlei/auto-crossbreeding/tree/improve_autocrossbreed which was originally authored by huchenlei and improved by xyqyear. Huge props to them for getting this off the ground and allowing me to take it further.
 
 ## Notable Changes
 
 If you are familiar with the older versions of this code then here are some notable changes that motivated me to develop this fork in the first place.
 
-- Location of the Chests/Dislocator/Crop-Matron now make slightly more sense in my opinion.
+- Revamped layout to access chests more easily.
+- No lever needed for the charger (HUGE)
+- Uses dirt instead of fertilized dirt for crops requiring a particular block underneath, and faster growth
 - "docleanup" is no longer a flag that needs to be raised. It will do this automatically unless ANY argument is given.
-- If setup correctly, the robot should theoretically never crash
+- It is no longer the code's fault if any of the programs crash.
 - It is no longer necessary to break the robot after the storage farm is full in order to run autoSpread or autoTier again.
-- All of the programs run on the same farm layout to facilitate running autoSpread immediately after autoStat.
+- All of the programs run on the same layout to facilitate running autoSpread immediately after autoStat.
 - Additional functionality such as changing the threshold for autoSpread and autoStat directly from the config and whether or not to stat-up crops while running autoTier.
 - Included an uninstall script.
 - Code is generally cleaner and more organized with a lot of fluff removed.

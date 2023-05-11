@@ -2,20 +2,20 @@ local config = {
     -- NOTE: EACH CONFIG SHOULD END WITH A COMMA
 
     -- Side Length of Working Farm (Don't Change)
-    farmSize = 6,
+    workingFarmSize = 6,
     -- Side Length of Storage Farm (Don't Change)
     storageFarmSize = 9,
 
     -- The coordinate for charger
     chargerPos = {0, 0},
     -- The coordinate for the container contains crop sticks
-    stickContainerPos = {0, 1},
+    stickContainerPos = {-1, 0},
     -- The coordinate for the container to store seeds, products, etc
-    storagePos = {0, 2},
+    storagePos = {-2, 0},
     -- The coordinate for the farmland that the dislocator is facing
-    relayFarmlandPos = {0, 3},
+    relayFarmlandPos = {1, 1},
     -- The coordinate for the transvector dislocator
-    dislocatorPos = {0, 4},
+    dislocatorPos = {1, 2},
 
     -- The slot for spade (Don't Change)
     spadeSlot = 0,

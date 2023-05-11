@@ -16,4 +16,5 @@ local scripts = {
 
 for i=1, #scripts do
     shell.execute(string.format("rm %s", scripts[i]))
+    print("Successfully Uninstalled %s", scripts[i])
 end
