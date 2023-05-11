@@ -2,12 +2,12 @@ local config = require("config")
 
 -- WORKING FARM SLOT MAP
 --  _________________
--- |06 07 18 19 30 31|
--- |05 08 17 20 29 32|
--- |04 09 16 21 28 33|
--- |03 10 15 22 27 34|
--- |02 11 14 23 26 35|
--- |01 12 13 24 25 36|
+-- |31 30 19 18 07 06|
+-- |32 29 20 17 08 05|
+-- |33 28 21 16 09 04|
+-- |34 27 22 15 10 03|
+-- |35 26 23 14 11 02|
+-- |36 25 24 13 12 01|
 --  ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 local function posToSlot(farmSize, pos)
@@ -39,12 +39,12 @@ end
 
 
 local function globalToFarm(globalPos)
-    return posToSlot(config.farmSize, globalPos)
+    return posToSlot(config.workingFarmSize, globalPos)
 end
 
 
 local function farmToGlobal(farmSlot)
-    return slotToPos(config.farmSize, farmSlot)
+    return slotToPos(config.workingFarmSize, farmSlot)
 end
 
 
