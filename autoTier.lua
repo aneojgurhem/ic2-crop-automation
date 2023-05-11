@@ -132,14 +132,14 @@ local function tierOnce()
         -- Terminal Condition
         breedRound = breedRound + 1
         if (config.maxBreedRound and breedRound > config.maxBreedRound) then
-            print('Max round reached!')
+            print('Max Round Reached!')
             action.restockAll()
             return true
         end
 
         -- Terminal Condition
-        if #database.getStorage() >= 80 then
-            print('Storage full!')
+        if #database.getStorage() >= config.storageFarmArea then
+            print('Storage Full!')
             action.restockAll()
             return true
         end
@@ -164,6 +164,7 @@ end
 -- ====================== MAIN ======================
 
 local function init()
+    print('Beginning Initial Scan')
     database.resetStorage()
     database.scanFarm()
     database.scanStorage()
@@ -190,7 +191,7 @@ local function main()
     end
 
     gps.turnTo(1)
-    print("autoTier Complete!")
+    print('autoTier Complete!')
 end
 
 main()

@@ -60,7 +60,7 @@ local function checkChildren(slot, crop)
 
     elseif (not config.assumeNoBareStick) and crop.name == "crop" then
         action.placeCropStick()
-        
+
     elseif crop.isCrop then
         if isWeed(crop) then
             action.deweed()
@@ -111,12 +111,12 @@ local function statOnce()
         -- Terminal Condition
         if lowestStat == config.autoStatThreshold then
             action.restockAll()
-            print('Minimum stat threshold reached!')
+            print('Minimum Stat Threshold Reached!')
             return true
         end
 
         -- Scan
-        gps.go(posUtil.slotToPos(slot))
+        gps.go(posUtil.farmToGlobal(slot))
         local crop = scanner.scan()
 
         if slot % 2 == 0 then
@@ -135,18 +135,19 @@ end
 -- ======================== MAIN ========================
 
 local function init()
+    print('Beginning Initial Scan')
     database.scanFarm()
     database.scanStorage()
     updateLowest()
     targetCrop = database.getFarm()[1].name
-    print(string.format('Target crop recognized: %s.', targetCrop))
+    print(string.format('Target Crop Recognized: %s', targetCrop))
 end
 
 
 local function main()
     init()
 
-    -- Loop
+    -- Loop+
     while not statOnce() do
         gps.go({0,0})
         action.restockAll()
@@ -160,7 +161,7 @@ local function main()
     end
     
     gps.turnTo(1)
-    print("autoStat Complete!")
+    print('autoStat Complete!')
 end
 
 main()

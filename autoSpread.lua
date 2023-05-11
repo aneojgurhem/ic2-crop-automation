@@ -95,8 +95,8 @@ local function spreadOnce()
     for slot=1, config.workingFarmArea, 1 do
 
         -- Terminal Condition
-        if #database.getStorage() >= 81 then
-            print('Storage full!')
+        if #database.getStorage() >= config.storageFarmArea then
+            print('Storage Full!')
             action.restockAll()
             return true
         end
@@ -121,12 +121,13 @@ end
 -- ======================== MAIN ========================
 
 local function init()
+    print('Beginning Initial Scan')
     database.resetStorage()
     database.scanFarm()
     database.scanStorage()
     action.restockAll()
     targetCrop = database.getFarm()[1].name
-    print(string.format('Target crop recognized: %s.', targetCrop))
+    print(string.format('Target Crop Recognized: %s', targetCrop))
 end
 
 
@@ -147,7 +148,7 @@ local function main()
     end
 
     gps.turnTo(1)
-    print("autoSpread Complete!")
+    print('autoSpread Complete!')
 end
 
 main()
