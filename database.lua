@@ -30,8 +30,7 @@ end
 
 local function scanFarm()
     gps.save()
-    print(string.format("TEST: %s", config.workingFarmArea))
-    for slot=1, config.workingFarmArea, 2 do
+    for slot=1, 36, 2 do
         gps.go(posUtil.farmToGlobal(slot))
         local cropInfo = scanner.scan()
         if cropInfo.name == "air" then
