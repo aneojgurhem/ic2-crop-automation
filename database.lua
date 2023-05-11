@@ -1,5 +1,6 @@
 local gps = require("gps")
 local posUtil = require("posUtil")
+local action = require("action")
 local scanner = require("scanner")
 local config = require("config")
 local storage = {}
@@ -42,6 +43,7 @@ local function scanFarm()
             farm[slot] = cropInfo
         end
     end
+    action.restockAll()
 end
 
 

@@ -136,9 +136,8 @@ end
 
 local function init()
     database.scanFarm()
-    --database.scanStorage()
+    database.scanStorage()
     updateLowest()
-    action.restockAll()
     targetCrop = database.getFarm()[1].name
     print(string.format('Target crop recognized: %s.', targetCrop))
 end
