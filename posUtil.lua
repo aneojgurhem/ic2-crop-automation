@@ -29,12 +29,12 @@ local function slotToPos(farmSize, slot)
     local y
 
     if x % 2 == 1 then
-        y = Row + 1
-    else
         y = farmSize - Row
+    else
+        y = Row + 1
     end
 
-    return {x, y}
+    return {-x, y}
 end
 
 
