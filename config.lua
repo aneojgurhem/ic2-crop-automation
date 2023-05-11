@@ -69,7 +69,7 @@ local config = {
     elevatorPos = {0, 4}
 }
 
-config.farmArea = config.farmSize^2
+config.workingFarmArea = config.workingFarmSize^2
 config.storageFarmArea = config.storageFarmSize^2
 
 return config
