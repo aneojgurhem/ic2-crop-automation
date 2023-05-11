@@ -136,7 +136,7 @@ local function deweed()
 end
 
 
-local function transplant(src, dest)
+local function transplant(dest)
     local selectedSlot = robot.select()
     gps.save()
     robot.select(robot.inventorySize()+config.binderSlot)
@@ -168,6 +168,7 @@ local function transplant(src, dest)
         robot.suckDown()
     end
 
+    inventory_controller.equip()
     gps.resume()
     robot.select(selectedSlot)
 end
@@ -229,7 +230,7 @@ local function transplantToMultifarm(src, dest)
 end
 
 
-local function cleanup()
+local function cleanUp()
     for slot=2, config.workingFarmArea, 2 do
         gps.go(posUtil.farmToGlobal(slot))
         robot.swingDown()
@@ -237,7 +238,8 @@ local function cleanup()
             robot.suckDown()
         end
     end
-
+    gps.go({0,0})
+    gps.turnTo(1)
 end
 
 
@@ -251,5 +253,5 @@ return {
     deweed = deweed,
     transplant = transplant,
     transplantToMultifarm = transplantToMultifarm,
-    cleanup = cleanup
+    cleanUp = cleanUp
 }

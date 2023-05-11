@@ -5,7 +5,6 @@ local database = require('database')
 local scanner = require('scanner')
 local posUtil = require('posUtil')
 local config = require('config')
-local args = {...}
 local lowestStat
 local lowestStatSlot
 local targetCrop
@@ -35,15 +34,6 @@ local function updateLowest()
     end
 end
 
-
-local function findSuitableFarmSlot(crop)
-    if crop.gr + crop.ga - crop.re > lowestStat then
-        return lowestStatSlot
-    else
-        return 0
-    end
-end
-
 -- ====================== SCANNING ======================
 
 local function isWeed(crop)
@@ -67,19 +57,21 @@ local function checkChildren(slot, crop)
             action.placeCropStick()
 
         elseif crop.name == targetCrop then
-            local suitableSlot = findSuitableFarmSlot(crop)
-            if suitableSlot == 0 then
+            local stat = crop.gr + crop.ga - crop.re
+
+            if stat > lowestStat then
+                action.transplant(posUtil.farmToGlobal(lowestStatSlot))
+                action.placeCropStick(2)
+                database.updateFarm(lowestStatSlot, crop)
+                updateLowest()
+
+            else
                 action.deweed()
                 action.placeCropStick()
-            else
-                action.transplant(posUtil.farmToGlobal(slot), posUtil.farmToGlobal(suitableSlot))
-                action.placeCropStick(2)
-                database.updateFarm(suitableSlot, crop)
-                updateLowest()
             end
 
         elseif config.keepMutations and (not database.existInStorage(crop)) then
-            action.transplant(posUtil.farmToGlobal(slot), posUtil.storageToGlobal(database.nextStorageSlot()))
+            action.transplant(posUtil.storageToGlobal(database.nextStorageSlot()))
             action.placeCropStick(2)
             database.addToStorage(crop)
 
@@ -134,6 +126,7 @@ local function init()
     print('Beginning Initial Scan')
     database.scanFarm()
     updateLowest()
+
     targetCrop = database.getFarm()[1].name
     print(string.format('Target Crop Recognized: %s', targetCrop))
 end
@@ -148,13 +141,10 @@ local function main()
     end
 
     -- Finish
-    gps.go({0,0})
-    if #args == 0 then
-        action.cleanup()
-        gps.go({0,0})
+    if config.cleanUp then
+        action.cleanUp()
     end
-    
-    gps.turnTo(1)
+
     print('autoStat Complete!')
 end
 

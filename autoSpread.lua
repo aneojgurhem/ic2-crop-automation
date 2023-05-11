@@ -5,7 +5,6 @@ local posUtil = require("posUtil")
 local scanner = require("scanner")
 local action = require("action")
 local config = require("config")
-local args = {...}
 local emptySlot
 local targetCrop
 
@@ -52,28 +51,26 @@ local function checkChildren(slot, crop)
 
                 -- Make sure no parent on the working farm is empty
                 if FindEmpty() then
-                    action.transplant(posUtil.farmToGlobal(slot), posUtil.storageToGlobal(emptySlot))
+                    action.transplant(posUtil.storageToGlobal(emptySlot))
                     action.placeCropStick(2)
                     database.updateFarm(emptySlot, crop)
 
                 -- No parent is empty, put in storage
                 else
-                    action.transplant(posUtil.farmToGlobal(slot), posUtil.storageToGlobal(database.nextStorageSlot()))
+                    action.transplant(posUtil.storageToGlobal(database.nextStorageSlot()))
                     database.addToStorage(crop)
                     action.placeCropStick(2)
-
                 end
             end
 
         elseif config.keepMutations and (not database.existInStorage(crop)) then
-            action.transplant(posUtil.farmToGlobal(slot), posUtil.storageToGlobal(database.nextStorageSlot()))
+            action.transplant(posUtil.storageToGlobal(database.nextStorageSlot()))
             action.placeCropStick(2)
             database.addToStorage(crop)
 
         else
             action.deweed()
             action.placeCropStick()
-
         end
     end
 end
@@ -125,7 +122,7 @@ local function init()
     database.resetStorage()
     database.scanFarm()
     database.scanStorage()
-    action.restockAll()
+
     targetCrop = database.getFarm()[1].name
     print(string.format('Target Crop Recognized: %s', targetCrop))
 end
@@ -140,13 +137,10 @@ local function main()
     end
 
     -- Finish
-    gps.go({0,0})
-    if #args == 0 then
-        action.cleanup()
-        gps.go({0,0})
+    if config.cleanUp then
+        action.cleanUp()
     end
 
-    gps.turnTo(1)
     print('autoSpread Complete!')
 end
 

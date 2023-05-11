@@ -106,11 +106,12 @@ My repo is a fork from https://github.com/huchenlei/auto-crossbreeding/tree/impr
 If you are familiar with the older versions of this code then here are some notable changes that motivated me to develop this fork in the first place.
 
 - Revamped layout to access chests more easily.
-- Uses dirt instead of fertilized dirt for crops requiring a particular block underneath, and faster growth
+- Uses dirt instead of fertilized dirt for crops requiring a particular block underneath, and faster growth.
+- Moving crops is now more efficient which allows the robot to scan the farm quicker and prevent weeding.
 - "docleanup" is no longer a flag that needs to be raised. It will do this automatically unless ANY argument is given.
 - It is no longer the code's fault if any of the programs crash.
 - It is no longer necessary to break the robot after the storage farm is full in order to run autoSpread or autoTier again.
 - All of the programs run on the same layout to facilitate running autoSpread immediately after autoStat.
-- Additional functionality such as changing the threshold for autoSpread and autoStat directly from the config and whether or not to stat-up crops while running autoTier.
+- Included changing the threshold for autoSpread and autoStat directly from the config and the option to stat-up crops while running autoTier.
 - Included an uninstall script.
 - Code is generally cleaner and more organized with a lot of fluff removed.

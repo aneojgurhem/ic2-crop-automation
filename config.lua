@@ -26,7 +26,9 @@ local config = {
     -- The slot which the robot will stop storing items
     storageStopSlot = -3,
 
-    -- Utilize Storage Chest (Don't Change)
+    -- Once complete, remove all extra crop sticks to prevent the working farm from weeding
+    cleanUp = true,
+    -- Utilize storage chest (Don't Change)
     keepDrops = true,
     -- Keep crops that are not the recognized target crop during autoSpread and autoStat
     keepMutations = false,
