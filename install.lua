@@ -41,15 +41,15 @@ if args[2] ~= nil then
 end
 
 
-local repo = args[3] or "https://raw.githubusercontent.com/DylanTaylor1/ic2-crop-automation/";
+local repo = args[3] or "https://raw.githubusercontent.com/DylanTaylor1/ic2-crop-automation/"
 
 
 for i=1, #scripts do
-    shell.execute(string.format("wget -f %s%s/%s", repo, branch, scripts[i]));
+    shell.execute(string.format("wget -f %s%s/%s", repo, branch, scripts[i]))
 end
 
 if not exists("config.lua") then
-    shell.execute(string.format("wget %s%s/config.lua", repo, branch));
+    shell.execute(string.format("wget %s%s/config.lua", repo, branch))
 end
 
 if option == "updateconfig" then
@@ -60,5 +60,5 @@ if option == "updateconfig" then
         shell.execute("mv config.lua config.bak")
         print("Moved config.lua to config.bak")
     end
-    shell.execute(string.format("wget %s%s/config.lua", repo, branch));
+    shell.execute(string.format("wget %s%s/config.lua", repo, branch))
 end

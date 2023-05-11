@@ -106,7 +106,6 @@ My repo is a fork from https://github.com/huchenlei/auto-crossbreeding/tree/impr
 If you are familiar with the older versions of this code then here are some notable changes that motivated me to develop this fork in the first place.
 
 - Revamped layout to access chests more easily.
-- No lever needed for the charger (HUGE)
 - Uses dirt instead of fertilized dirt for crops requiring a particular block underneath, and faster growth
 - "docleanup" is no longer a flag that needs to be raised. It will do this automatically unless ANY argument is given.
 - It is no longer the code's fault if any of the programs crash.

@@ -38,7 +38,7 @@ local function charge(resume)
 
     gps.go(config.chargerPos)
     repeat
-        signal.pulseDown(0.5)
+        os.sleep(0.5)
     until fullyCharged()
 
     if resume ~= false then
