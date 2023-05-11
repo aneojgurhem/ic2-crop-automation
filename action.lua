@@ -1,8 +1,8 @@
 local component = require("component")
 local robot = require("robot")
+local sides = require("sides")
 local computer = require("computer")
 local os = require("os")
-local sides = require("sides")
 local gps = require("gps")
 local config = require("config")
 local signal = require("signal")
@@ -142,15 +142,12 @@ local function transplant(src, dest)
     robot.select(robot.inventorySize()+config.binderSlot)
     inventory_controller.equip()
 
-    -- transfer the crop to the relay location
-    gps.go(config.dislocatorPos)
-    robot.useDown(sides.down)
-    gps.go(src)
-    robot.useDown(sides.down, true) -- sneak-right-click on crops to prevent harvesting
+    -- TRANSFER TO RELAY LOCATION (SNEAK PREVENTS HARVESTING)
+    robot.useDown(sides.down, true)
     gps.go(config.dislocatorPos)
     signal.pulseDown()
 
-    -- transfer the crop to the destination
+    -- TRANSFER CROP TO DESTINATION
     robot.useDown(sides.down)
     gps.go(dest)
     if scanner.scan().name == "air" then
@@ -160,7 +157,7 @@ local function transplant(src, dest)
     gps.go(config.dislocatorPos)
     signal.pulseDown()
 
-    -- destroy the original crop
+    -- DESTROY ORIGINAL CROP
     gps.go(config.relayFarmlandPos)
     deweed()
     robot.swingDown()
@@ -168,7 +165,13 @@ local function transplant(src, dest)
         robot.suckDown()
     end
 
+    -- PREP FOR NEXT
+    gps.go(config.dislocatorPos)
+    robot.select(robot.inventorySize()+config.binderSlot)
     inventory_controller.equip()
+    robot.useDown(sides.down, true)
+    inventory_controller.equip()
+
     gps.resume()
     robot.select(selectedSlot)
 end
@@ -231,7 +234,7 @@ end
 
 
 local function cleanup()
-    for slot=2, config.farmArea, 2 do
+    for slot=2, config.workingFarmArea, 2 do
         gps.go(posUtil.farmToGlobal(slot))
         robot.swingDown()
         if config.KeepDrops then

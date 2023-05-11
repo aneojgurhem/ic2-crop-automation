@@ -1,8 +1,12 @@
+local component = require("component")
+local robot = require("robot")
+local sides = require("sides")
 local gps = require("gps")
 local posUtil = require("posUtil")
 local action = require("action")
 local scanner = require("scanner")
 local config = require("config")
+local inventory_controller = component.inventory_controller
 local storage = {}
 local reverseStorage = {}
 local farm = {}
@@ -45,6 +49,14 @@ local function scanFarm()
         end
     end
     action.restockAll()
+
+    -- PREP DISLOCATOR
+    gps.go(config.dislocatorPos)
+    robot.select(robot.inventorySize()+config.binderSlot)
+    inventory_controller.equip()
+    robot.useDown(sides.down, true)
+    inventory_controller.equip()
+
     gps.resume()
 end
 
