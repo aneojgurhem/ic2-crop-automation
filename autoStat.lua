@@ -1,10 +1,10 @@
-local robot = require("robot")
-local gps = require("gps")
-local action = require("action")
-local database = require("database")
-local scanner = require("scanner")
-local posUtil = require("posUtil")
-local config = require("config")
+local robot = require('robot')
+local gps = require('gps')
+local action = require('action')
+local database = require('database')
+local scanner = require('scanner')
+local posUtil = require('posUtil')
+local config = require('config')
 local args = {...}
 local lowestStat
 local lowestStatSlot
@@ -21,7 +21,7 @@ local function updateLowest()
         local crop = farm[slot]
 
         if crop ~= nil then
-            if crop.name == 'crop' then
+            if (crop.name == 'crop') or (crop.name == 'air') then
                 lowestStatSlot = slot
                 break
             else
@@ -47,18 +47,18 @@ end
 -- ====================== SCANNING ======================
 
 local function isWeed(crop)
-    return crop.name == "weed" or
-        crop.name == "Grass" or
+    return crop.name == 'weed' or
+        crop.name == 'Grass' or
         crop.gr > 21 or
-        (crop.name == "venomilia" and crop.gr > 7)
+        (crop.name == 'venomilia' and crop.gr > 7)
 end
 
 
 local function checkChildren(slot, crop)
-    if crop.name == "air" then
+    if crop.name == 'air' then
         action.placeCropStick(2)
 
-    elseif (not config.assumeNoBareStick) and crop.name == "crop" then
+    elseif (not config.assumeNoBareStick) and crop.name == 'crop' then
         action.placeCropStick()
 
     elseif crop.isCrop then
@@ -92,8 +92,8 @@ end
 
 
 local function checkParent(slot, crop)
-    if crop.name == "air" then
-        database.updateFarm(slot, 'crop')
+    if crop.name == 'air' then
+        database.updateFarm(slot, 'air')
         updateLowest()
 
     elseif crop.isCrop and isWeed(crop) then
@@ -147,7 +147,7 @@ end
 local function main()
     init()
 
-    -- Loop+
+    -- Loop
     while not statOnce() do
         gps.go({0,0})
         action.restockAll()
