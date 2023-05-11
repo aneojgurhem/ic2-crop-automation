@@ -133,7 +133,6 @@ end
 local function init()
     print('Beginning Initial Scan')
     database.scanFarm()
-    --database.scanStorage()
     updateLowest()
     targetCrop = database.getFarm()[1].name
     print(string.format('Target Crop Recognized: %s', targetCrop))

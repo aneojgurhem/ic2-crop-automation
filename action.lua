@@ -157,6 +157,9 @@ local function transplant(src, dest)
     gps.go(config.dislocatorPos)
     signal.pulseDown()
 
+    -- PREP FOR NEXT
+    robot.useDown(sides.down, true)
+
     -- DESTROY ORIGINAL CROP
     gps.go(config.relayFarmlandPos)
     deweed()
@@ -164,13 +167,6 @@ local function transplant(src, dest)
     if config.KeepDrops then
         robot.suckDown()
     end
-
-    -- PREP FOR NEXT
-    gps.go(config.dislocatorPos)
-    robot.select(robot.inventorySize()+config.binderSlot)
-    inventory_controller.equip()
-    robot.useDown(sides.down, true)
-    inventory_controller.equip()
 
     gps.resume()
     robot.select(selectedSlot)
