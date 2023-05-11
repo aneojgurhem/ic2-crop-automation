@@ -40,7 +40,7 @@ local config = {
     -- Minimum Gr + Ga - Re for the storage farm during autoSpread (21 + 31 - 0 = 52)
     autoSpreadThreshold = 46,
     -- Minimum Gr + Ga - Re for the working farm during autoStat (21 + 31 - 0 = 52)
-    autoStatThreshold = 50,
+    autoStatThreshold = 52,
 
     -- Assume there is no bare stick in the farm, should increase speed.
     assumeNoBareStick = true,

@@ -148,7 +148,7 @@ local function transplant(dest)
     signal.pulseDown()
 
     -- TRANSFER CROP TO DESTINATION
-    robot.useDown(sides.down)
+    robot.useDown(sides.down, true)
     gps.go(dest)
     if scanner.scan().name == "air" then
         placeCropStick()
@@ -238,8 +238,7 @@ local function cleanUp()
             robot.suckDown()
         end
     end
-    gps.go({0,0})
-    gps.turnTo(1)
+    restockAll()
 end
 
 

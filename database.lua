@@ -12,24 +12,15 @@ local reverseStorage = {}
 local farm = {}
 local lastMultifarmPos = {0, 0}
 
-
-local function getStorage()
-    return storage
-end
-
+-- ======================== WORKING FARM ========================
 
 local function getFarm()
     return farm
 end
 
 
-local function getLastMultifarmPos()
-    return lastMultifarmPos
-end
-
-
-local function setLastMultifarmPos(pos)
-    lastMultifarmPos = pos
+local function updateFarm(slot, crop)
+    farm[slot] = crop
 end
 
 
@@ -54,10 +45,27 @@ local function scanFarm()
     gps.go(config.dislocatorPos)
     robot.select(robot.inventorySize()+config.binderSlot)
     inventory_controller.equip()
-    robot.useDown(sides.down, true)
+    robot.useDown(sides.down)
     inventory_controller.equip()
 
     gps.resume()
+end
+
+-- ======================== STORAGE FARM ========================
+
+local function getStorage()
+    return storage
+end
+
+
+local function resetStorage()
+    storage = {}
+end
+
+
+local function addToStorage(crop)
+    storage[#storage+1] = crop
+    reverseStorage[crop.name] = #storage
 end
 
 
@@ -77,19 +85,41 @@ local function scanStorage()
 end
 
 
-local function resetStorage()
-    storage = {}
+local function existInStorage(crop)
+    if reverseStorage[crop.name] then
+        return true
+    else
+        return false
+    end
 end
 
 
-local function addToStorage(crop)
-    storage[#storage+1] = crop
-    reverseStorage[crop.name] = #storage
+local function notWater(slot)
+    if (slot == 21) or (slot == 25) or (slot == 57) or (slot == 61) then
+        return false
+    else
+        return true
+    end
 end
 
 
-local function updateFarm(slot, crop)
-    farm[slot] = crop
+local function nextStorageSlot()
+    if notWater(#storage + 1) then
+        return #storage + 1
+    else
+        return #storage + 2
+    end
+end
+
+-- ========================= MULTI FARM =========================
+
+local function getLastMultifarmPos()
+    return lastMultifarmPos
+end
+
+
+local function setLastMultifarmPos(pos)
+    lastMultifarmPos = pos
 end
 
 
@@ -157,33 +187,38 @@ local function scanMultifarm()
 end
 
 
-local function existInStorage(crop)
-    if reverseStorage[crop.name] then
-        return true
-    else
-        return false
-    end
-end
 
 
-local function nextStorageSlot()
-    return #storage+1
-end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 return {
-    getStorage = getStorage,
     getFarm = getFarm,
+    updateFarm = updateFarm,
+    scanFarm = scanFarm,
+    getStorage = getStorage,
+    resetStorage = resetStorage,
+    addToStorage = addToStorage,
+    scanStorage = scanStorage,
+    existInStorage = existInStorage,
+    notWater = notWater,
+    nextStorageSlot = nextStorageSlot,
     getLastMultifarmPos = getLastMultifarmPos,
     setLastMultifarmPos = setLastMultifarmPos,
-    scanFarm = scanFarm,
-    scanStorage = scanStorage,
-    resetStorage = resetStorage,
-    scanMultifarm = scanMultifarm,
-    existInStorage = existInStorage,
-    nextStorageSlot = nextStorageSlot,
-    addToStorage = addToStorage,
-    updateFarm = updateFarm,
     nextMultifarmPos = nextMultifarmPos,
-    updateMultifarm = updateMultifarm
+    updateMultifarm = updateMultifarm,
+    scanMultifarm = scanMultifarm
 }
