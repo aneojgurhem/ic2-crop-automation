@@ -113,11 +113,7 @@ end
 
 
 local function checkParent(slot, crop)
-    if crop.name == "air" then
-        database.updateFarm(slot, nil)
-        updateLowest()
-
-    elseif crop.isCrop and isWeed(crop) then
+    if crop.isCrop and isWeed(crop) then
         action.deweed()
         database.updateFarm(slot, nil)
         updateLowest()
@@ -179,7 +175,6 @@ local function main()
 
     -- Loop
     while not tierOnce() do
-        gps.go({0,0})
         action.restockAll()
     end
 

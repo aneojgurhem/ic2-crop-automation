@@ -30,6 +30,7 @@ end
 
 
 local function scanFarm()
+    gps.save()
     for slot=1, config.workingFarmArea, 2 do
         gps.go(posUtil.farmToGlobal(slot))
         local cropInfo = scanner.scan()
@@ -44,6 +45,7 @@ local function scanFarm()
         end
     end
     action.restockAll()
+    gps.resume()
 end
 
 

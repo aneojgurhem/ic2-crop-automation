@@ -92,10 +92,6 @@ end
 
 
 local function checkParent(slot, crop)
-    -- if crop.name == 'air' then
-    --     database.updateFarm(slot, 'air')
-    --     updateLowest()
-
     if crop.isCrop and isWeed(crop) then
         action.deweed()
         database.updateFarm(slot, 'crop')
@@ -149,7 +145,6 @@ local function main()
 
     -- Loop
     while not statOnce() do
-        gps.go({0,0})
         action.restockAll()
     end
 

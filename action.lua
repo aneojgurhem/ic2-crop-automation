@@ -96,11 +96,9 @@ end
 
 
 local function restockAll()
-    gps.save()
     dumpInventory(false)
     restockStick(false)
     charge(false)
-    gps.resume()
 end
 
 

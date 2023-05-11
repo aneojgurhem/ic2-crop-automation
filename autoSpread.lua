@@ -136,7 +136,6 @@ local function main()
 
     -- Loop
     while not spreadOnce() do
-        gps.go({0, 0})
         action.restockAll()
     end
 
