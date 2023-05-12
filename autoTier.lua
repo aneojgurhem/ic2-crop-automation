@@ -131,7 +131,7 @@ local function tierOnce()
         end
 
         -- Scan
-        gps.go(posUtil.farmToGlobal(slot))
+        gps.go(posUtil.workingSlotToPos(slot))
         local crop = scanner.scan()
 
         if slot % 2 == 0 then

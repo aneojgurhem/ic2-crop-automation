@@ -99,6 +99,7 @@ local function restockAll()
     dumpInventory(false)
     restockStick(false)
     charge(false)
+    gps.turnTo(1)
 end
 
 
