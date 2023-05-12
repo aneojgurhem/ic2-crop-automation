@@ -60,7 +60,7 @@ local function checkChildren(slot, crop)
             local stat = crop.gr + crop.ga - crop.re
 
             if stat > lowestStat then
-                action.transplant(posUtil.farmToGlobal(lowestStatSlot))
+                action.transplant(posUtil.workingSlotToPos(slot), posUtil.workingSlotToPos(lowestStatSlot))
                 action.placeCropStick(2)
                 database.updateFarm(lowestStatSlot, crop)
                 updateLowest()
@@ -71,7 +71,7 @@ local function checkChildren(slot, crop)
             end
 
         elseif config.keepMutations and (not database.existInStorage(crop)) then
-            action.transplant(posUtil.storageToGlobal(database.nextStorageSlot()))
+            action.transplant(posUtil.workingSlotToPos(slot), posUtil.storageSlotToPos(database.nextStorageSlot()))
             action.placeCropStick(2)
             database.addToStorage(crop)
 
@@ -97,8 +97,7 @@ local function statOnce()
     for slot=1, config.workingFarmArea, 1 do
 
         -- Terminal Condition
-        if lowestStat == config.autoStatThreshold then
-            action.restockAll()
+        if lowestStat >= config.autoStatThreshold then
             print('Minimum Stat Threshold Reached!')
             return true
         end

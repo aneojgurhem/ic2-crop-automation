@@ -69,9 +69,9 @@ local function storageSlotToPos(slot)
     local y
 
     if x % 2 == 1 then
-        y = config.storageFarmSize - Row - 2
-    else
         y = -Row + 7
+    else
+        y = Row - 2
     end
 
     return {x, y}

@@ -1,10 +1,10 @@
-local robot = require("robot")
-local database = require("database")
-local gps = require("gps")
-local posUtil = require("posUtil")
-local scanner = require("scanner")
-local action = require("action")
-local config = require("config")
+local robot = require('robot')
+local database = require('database')
+local gps = require('gps')
+local posUtil = require('posUtil')
+local scanner = require('scanner')
+local action = require('action')
+local config = require('config')
 local emptySlot
 local targetCrop
 
@@ -26,18 +26,18 @@ end
 -- ====================== SCANNING ======================
 
 local function isWeed(crop)
-    return crop.name == "weed" or
-        crop.name == "Grass" or
+    return crop.name == 'weed' or
+        crop.name == 'Grass' or
         crop.gr > 21 or
-        (crop.name == "venomilia" and crop.gr > 7)
+        (crop.name == 'venomilia' and crop.gr > 7)
 end
 
 
 local function checkChildren(slot, crop)
-    if crop.name == "air" then
+    if crop.name == 'air' then
         action.placeCropStick(2)
 
-    elseif (not config.assumeNoBareStick) and crop.name == "crop" then
+    elseif (not config.assumeNoBareStick) and crop.name == 'crop' then
         action.placeCropStick()
 
     elseif crop.isCrop then
@@ -51,20 +51,20 @@ local function checkChildren(slot, crop)
 
                 -- Make sure no parent on the working farm is empty
                 if FindEmpty() then
-                    action.transplant(posUtil.storageToGlobal(emptySlot))
+                    action.transplant(posUtil.workingSlotToPos(slot), posUtil.workingSlotToPos(emptySlot))
                     action.placeCropStick(2)
                     database.updateFarm(emptySlot, crop)
 
                 -- No parent is empty, put in storage
                 else
-                    action.transplant(posUtil.storageToGlobal(database.nextStorageSlot()))
+                    action.transplant(posUtil.workingSlotToPos(slot), posUtil.storageSlotToPos(database.nextStorageSlot()))
                     database.addToStorage(crop)
                     action.placeCropStick(2)
                 end
             end
 
         elseif config.keepMutations and (not database.existInStorage(crop)) then
-            action.transplant(posUtil.storageToGlobal(database.nextStorageSlot()))
+            action.transplant(posUtil.workingSlotToPos(slot), posUtil.storageSlotToPos(database.nextStorageSlot()))
             action.placeCropStick(2)
             database.addToStorage(crop)
 
@@ -77,7 +77,7 @@ end
 
 
 local function checkParent(slot, crop)
-    if crop.name == "air" then
+    if crop.name == 'air' then
         database.updateFarm(slot, 'empty')
 
     elseif crop.isCrop and isWeed(crop) then
@@ -94,7 +94,6 @@ local function spreadOnce()
         -- Terminal Condition
         if #database.getStorage() >= config.storageFarmArea then
             print('Storage Full!')
-            action.restockAll()
             return true
         end
 
@@ -121,7 +120,6 @@ local function init()
     print('Beginning Initial Scan')
     database.resetStorage()
     database.scanFarm()
-    database.scanStorage()
 
     targetCrop = database.getFarm()[1].name
     print(string.format('Target Crop Recognized: %s', targetCrop))

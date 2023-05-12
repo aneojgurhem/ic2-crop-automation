@@ -1,12 +1,8 @@
-local component = require("component")
-local robot = require("robot")
-local sides = require("sides")
 local gps = require("gps")
 local posUtil = require("posUtil")
 local action = require("action")
 local scanner = require("scanner")
 local config = require("config")
-local inventory_controller = component.inventory_controller
 local storage = {}
 local reverseStorage = {}
 local farm = {}
@@ -27,7 +23,8 @@ end
 local function scanFarm()
     gps.save()
     for slot=1, config.workingFarmArea, 2 do
-        gps.go(posUtil.farmToGlobal(slot))
+        gps.go(posUtil.workingSlotToPos(slot))
+
         local cropInfo = scanner.scan()
         if cropInfo.name == "air" then
             cropInfo.tier = 0
@@ -40,14 +37,6 @@ local function scanFarm()
         end
     end
     action.restockAll()
-
-    -- PREP DISLOCATOR
-    gps.go(config.dislocatorPos)
-    robot.select(robot.inventorySize()+config.binderSlot)
-    inventory_controller.equip()
-    robot.useDown(sides.down)
-    inventory_controller.equip()
-
     gps.resume()
 end
 
@@ -72,7 +61,7 @@ end
 local function scanStorage()
     gps.save()
     for slot=1, config.storageFarmArea do
-        gps.go(posUtil.storageToGlobal(slot))
+        gps.go(posUtil.storageSlotToPos(slot))
         local cropInfo = scanner.scan()
         if cropInfo.name ~= "air" then
             storage[slot] = cropInfo
@@ -185,24 +174,6 @@ local function scanMultifarm()
     gps.up(3)
     gps.resume()
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 return {

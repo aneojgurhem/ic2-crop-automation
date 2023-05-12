@@ -136,13 +136,16 @@ local function deweed()
 end
 
 
-local function transplant(dest)
+local function transplant(src, dest)
     local selectedSlot = robot.select()
     gps.save()
     robot.select(robot.inventorySize()+config.binderSlot)
     inventory_controller.equip()
 
-    -- TRANSFER TO RELAY LOCATION (SNEAK PREVENTS HARVESTING)
+    -- TRANSFER TO RELAY LOCATION
+    gps.go(config.dislocatorPos)
+    robot.useDown(sides.down)
+    gps.go(src)
     robot.useDown(sides.down, true)
     gps.go(config.dislocatorPos)
     signal.pulseDown()
@@ -156,9 +159,6 @@ local function transplant(dest)
     robot.useDown(sides.down, true)
     gps.go(config.dislocatorPos)
     signal.pulseDown()
-
-    -- PREP FOR NEXT
-    robot.useDown(sides.down, true)
 
     -- DESTROY ORIGINAL CROP
     gps.go(config.relayFarmlandPos)
@@ -232,7 +232,7 @@ end
 
 local function cleanUp()
     for slot=2, config.workingFarmArea, 2 do
-        gps.go(posUtil.farmToGlobal(slot))
+        gps.go(posUtil.workingSlotToPos(slot))
         robot.swingDown()
         if config.KeepDrops then
             robot.suckDown()
