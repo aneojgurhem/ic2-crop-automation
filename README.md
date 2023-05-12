@@ -1,6 +1,6 @@
 # Introduction
 
-This Open computers (OC) Script will automatically tier up, stat up, and spread (duplicate) crops for you. Open Computers is a very powerful yet complicated mod using custom scripts written in lua, but fear not. I have made everything here as straight forward as possible to help you get your crop bot running in no time. (NOTE: The Geolyzer was broken upon the release of version 2.1.2.1, this script will not work until switching to a older or more recent version)
+This Open computers (OC) Script will automatically tier-up, stat-up, and spread (duplicate) crops for you. Open Computers is a very powerful yet complicated mod using custom scripts written in lua, but fear not. I have made everything here as straight forward as possible to help you get your crop bot running in no time. (NOTE: The Geolyzer was broken upon the release of version 2.1.2.1, this script will not work until switching to a older or more recent version)
 
 # Bare Minimum Components
 
@@ -24,7 +24,7 @@ Obtaining these components will require access to EV circuits and epoxid (late H
 - Internet Card
 - OpenOS (Operating System)
 
-You will also need a Transvector Binder and Transvector Dislocator which requires some progression in Thaumcraft. However, it is not too deep and completely doable if you are already able to make EV circuits and epoxid. Transvector Dislocator can be found under "Thaumic Tinkerer" and requires the following prerequisites on the same tab: Transvector Interface and Smokey Quartz. You will also need to complete research on Mirror Magic under "Artifice." For more information, visit the Thaumcraft Research Cheatsheet at https://gtnh.miraheze.org/wiki/Thaumcraft_Research_Cheatsheet.
+Lastly, you need a Transvector Binder and Transvector Dislocator which requires some progression in Thaumcraft. However, it is not too deep and completely doable if you are already able to make EV circuits and epoxid. Transvector Dislocator can be found under "Thaumic Tinkerer" and requires the following prerequisites on the same tab: Transvector Interface and Smokey Quartz. You will also need to complete research on Mirror Magic under "Artifice." For more information, visit the Thaumcraft Research Cheatsheet at https://gtnh.miraheze.org/wiki/Thaumcraft_Research_Cheatsheet.
 
 # Building the Robot
 
@@ -46,10 +46,10 @@ You will also need a Transvector Binder and Transvector Dislocator which require
 10. To edit the config (not recommended) enter
 
         edit config.lua
-c
+
 11. Place the Spade and Transvector Binder into the last and second to last slot of the robot, respectively. Crop sticks will go in the third, but it is not required to put them in yourself. An axe or mattock can also be placed into the tool slot of the robot (optional) to speed up destroying crops. See image below.
 
-![Robot Inventory](media/Robot_Inventory2.png)
+![Robot Inventory](media/Robot_Inventory3.png)
 
 # Building the Farms
 
