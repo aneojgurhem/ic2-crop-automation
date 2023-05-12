@@ -46,10 +46,10 @@ You will also need a Transvector Binder and Transvector Dislocator which require
 10. To edit the config (not recommended) enter
 
         edit config.lua
-
+c
 11. Place the Spade and Transvector Binder into the last and second to last slot of the robot, respectively. Crop sticks will go in the third, but it is not required to put them in yourself. An axe or mattock can also be placed into the tool slot of the robot (optional) to speed up destroying crops. See image below.
 
-![Robot Inventory](media/Robot_Inventory.png)
+![Robot Inventory](media/Robot_Inventory2.png)
 
 # Building the Farms
 
@@ -57,7 +57,7 @@ First off, it is recommended to set everything up in a Jungle or Swamp biome at 
 
 ![Farm Top](media/Farm_Top.png)
 
-First note the orientation of the robot sitting atop the OC charger. It must face up towards the right-most column of the working farm. If the crop stick chest is ever empty, the robot will run into errors and the script will crash. In the image, I have a trash can on the other side of the crop stick chest because I do not want any drops beyond the target crop, but this can be a second chest if you do want random drops. The blank fertilized dirt is for the transvector dislocator which should be facing it. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops to help them grow a little faster.
+First note the orientation of the robot sitting atop the OC charger. It must face up towards the right-most column of the working farm. If the crop stick chest is ever empty, the robot will run into errors and the script will crash. In the image, I have a trash can on the other side of the crop stick chest because I do not want any drops beyond the target crop, but this can be a second chest if you do want random drops. The blank soil is for the transvector dislocator which should be facing it. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops to help them grow a little faster.
 
 The location of the water MUST be exactly as seen in the photo (underneath all five sea lantern slabs). At a minimum, there MUST be a block above the water in the working farm. The block can be literally anything, even a lilypad will work, so long as there is something. However, I recommend using some sort of light source to help crops grow at night. Nothing needs to be above the water blocks on the storage farm, but it is more aesthetic if they all match.
 
@@ -65,7 +65,7 @@ The starting crops must be placed manually in the checkerboard pattern seen in t
 
 ![Farm Bottom](media/Farm_Bottom.png)
 
-Underneath the farm, you can see that there are three additional dirt blocks below each farmland, each of which add to the nutrient stat of the crop above it. For crops requiring a block underneath, that should be placed at the bottom. In this case, I have diareed planted on top which means I have one farmland --> two dirt --> one diamond block underneath each one. For power, I am using an HV gas turbine and a super tank with some benzene (no transformer required). This is a little overkill, but the important part is that the charger is always at 100% charging speed which you can see by hovering over it. A set-up such as this will last forever with a few hundred thousand benzene since both machines require very little EU/t. Lastly, a reservoir feeds water into the crop-matron automatically after right-clicking it with a wrench.
+Underneath the farm, you can see that there are three additional dirt blocks below each farmland, each of which add to the nutrient stat of the crop above it. For crops requiring a block underneath, that should be placed at the bottom. In this case, I have diareed planted on top which means I have one farmland --> two dirt --> one diamond block underneath each one. For power, I am using an HV gas turbine and a super tank with some benzene (no transformer needed). This is a little overkill, but the important part is that the charger is always at 100% charging speed which you can see by hovering over it. A set-up such as this will last forever with a few hundred thousand benzene since both machines require very little EU/t. Lastly, a reservoir feeds water into the crop-matron automatically after right-clicking it with a wrench.
 
 # Running the Programs
 
@@ -116,7 +116,7 @@ If you are familiar with the older versions of this code then here are some nota
 - Added configurable option to cleanup after complete (no longer a flag).
 - Added a built-in storage reset to prevent having to break the robot in order to run autoSpread or autoTier more than once.
 - Added an uninstall script.
-- Code is a LOT cleaner and more organized.
+- Code is a LOT cleaner and more organized, just look at this README
 - It is no longer the code's fault if any of the programs crash.
 
 ![Giant Sword](media/Giant_Sword.png)
