@@ -25,14 +25,6 @@ end
 
 -- ====================== SCANNING ======================
 
-local function isWeed(crop)
-    return crop.name == 'weed' or
-        crop.name == 'Grass' or
-        crop.gr > 21 or
-        (crop.name == 'venomilia' and crop.gr > 7)
-end
-
-
 local function checkChildren(slot, crop)
     if crop.name == 'air' then
         action.placeCropStick(2)
@@ -41,7 +33,7 @@ local function checkChildren(slot, crop)
         action.placeCropStick()
 
     elseif crop.isCrop then
-        if isWeed(crop) then
+        if scanner.isWeed(crop) then
             action.deweed()
             action.placeCropStick()
 
@@ -80,7 +72,7 @@ local function checkParent(slot, crop)
     if crop.name == 'air' then
         database.updateFarm(slot, 'empty')
 
-    elseif crop.isCrop and isWeed(crop) then
+    elseif crop.isCrop and scanner.isWeed(crop) then
         action.deweed()
         database.updateFarm(slot, 'empty')
     end

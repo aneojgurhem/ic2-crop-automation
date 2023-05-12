@@ -1,4 +1,4 @@
-local robot = require("robot")
+local robot = require('robot')
 local nowFacing = 1
 local nowPos = {0, 0}
 local savedPos = {}

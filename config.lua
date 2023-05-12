@@ -35,12 +35,14 @@ local config = {
     -- Whether or not to stat-up crops during autoTier (Very Slow)
     statWhileTiering = false,
 
-    -- NOTE: GROWTH IS CAPPED AT 21, ANY HIGHER IS RECOGNIZED AS A WEED
-
-    -- Minimum Gr + Ga - Re for the storage farm during autoSpread (21 + 31 - 0 = 52)
-    autoSpreadThreshold = 46,
+    -- Maximum Growth Stat
+    maxGrowth = 21,
+    -- Maximum Resistance Stat
+    maxResistance = 2,
     -- Minimum Gr + Ga - Re for the working farm during autoStat (21 + 31 - 0 = 52)
     autoStatThreshold = 52,
+    -- Minimum Gr + Ga - Re for the storage farm during autoSpread (21 + 31 - 0 = 52)
+    autoSpreadThreshold = 46,
 
     -- Assume there is no bare stick in the farm, should increase speed.
     assumeNoBareStick = true,

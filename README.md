@@ -47,55 +47,57 @@ You will also need a Transvector Binder and Transvector Dislocator which require
 
         edit config.lua
 
-11. Place the Spade and Transvector Binder into the last and second to last slot of the robot, respectively. Crop sticks will go in the third, but it is not required to put them in yourself. See image below.
+11. Place the Spade and Transvector Binder into the last and second to last slot of the robot, respectively. Crop sticks will go in the third, but it is not required to put them in yourself. An axe or mattock can also be placed into the tool slot of the robot (optional) to speed up destroying crops. See image below.
 
-![robot inventory](media/Robot_Inventory.png)
+![Robot Inventory](media/Robot_Inventory.png)
 
 # Building the Farms
 
-First off, it is recommended to set everything up in a Jungle or Swamp biome at Y=130 as that will give you the highest humidity and air quality stats. This is most easily done in a personal dimension which you earn as a quest reward from reaching the moon. Do not place any solid blocks above the farm as that will reduce the air quality. All of the machines are waterproof (except for power which should be underneath the farm anyway) so do not worry about the rain. Use fertilized dirt or garden soil because they do not require a nearby water source. The whole farm will fit into a single chunk for easy chunk loading. See image below.
+First off, it is recommended to set everything up in a Jungle or Swamp biome at Y=130 as that will give you the highest humidity and air quality stats. This is most easily done in a personal dimension which you earn as a quest reward from reaching the moon. Do not place any solid blocks above the farm as that will reduce the air quality. All of the machines on the surface are waterproof so do not worry about the rain. Use vanilla dirt because that will allow you to grow crops that require a particular block underneath, and boost the nutrient stat of your crops. The whole farm will fit into a single chunk for easy chunk loading. See image below.
 
-![setup for crossbreeding](media/Farm_Layout2.png)
+![Farm Top](media/Farm_Top.png)
 
-First note the orientation of the robot sitting atop the OC charger. It must face up towards the crop stick chest. If the crop stick chest is ever empty, the robot will run into errors and the script will crash. In the image, I have a trash can on the other side of the crop stick chest because I do not want any drops beyond the target crop, but this can be replaced with another chest if need be. The blank fertilized dirt is for the transvector dislocator which should be facing it. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops so everything runs a little faster.
+First note the orientation of the robot sitting atop the OC charger. It must face up towards the right-most column of the working farm. If the crop stick chest is ever empty, the robot will run into errors and the script will crash. In the image, I have a trash can on the other side of the crop stick chest because I do not want any drops beyond the target crop, but this can be a second chest if you do want random drops. The blank fertilized dirt is for the transvector dislocator which should be facing it. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops to help them grow a little faster.
 
-The starting crops must be placed manually in the checkerboard pattern seen in the photo. This layout goes for all three programs. If you cannot fill the entire checkerboard to start, the absolute minimum required is two (one as the target crop and the other next to it for crossbreeding). It is not necessary to place empty crop sticks to fill the rest of the checkerboard. The target crop is used by autoStat and autoSpread to identify the crop you want to stat-up or spread to the storage farm.
+The location of the water MUST be exactly as seen in the photo (underneath all five sea lantern slabs). At a minimum, there MUST be a block above the water in the working farm. The block can be literally anything, even a lilypad will work, so long as there is something. However, I recommend using some sort of light source to help crops grow at night. Nothing necessarily needs to be above the water blocks on the storage farm, but it is more aesthetic if they all match.
+
+The starting crops must be placed manually in the checkerboard pattern seen in the photo. This layout goes for all three programs. If you cannot fill the entire checkerboard to start, the absolute minimum required is two (one as the target crop and the other next to it for crossbreeding). It is not necessary to place empty crop sticks to fill the rest of the checkerboard. The target crop is used by autoStat and autoSpread to identify the crop you want to stat-up or spread to the storage farm, respectively.
+
+![Farm Bottom](media/Farm_Bottom.png)
+
+Underneath the farm, you can see that there are three additional dirt blocks below each farmland, each of which add to the nutrient stat of the crop above it. For crops requiring a block underneath, that should be placed at the bottom. In this case, I have diareed planted on top which means I have one farmland --> two dirt --> one diamond block underneath each one. For power, I am simply using a LV gas turbine and a super tank with some benzene. Both the charger and the crop-matron require power, but a set-up such as this will last forever since they both require very minimal EU/t. Lastly, a reservoir feeds water into the crop-matron automatically after right-clicking it with a wrench.
 
 # Running the Programs
 
-The first program is autoTier. This will automatically tier up your crops, terminating once the max breeding round is reached (configurable) or the storge farm is full. A storage chest is recommended for this program. Note that unrecognized crops will be moved to the storage farm first before replacing any of the lower tier crops in the working farm. Statting-up crops before increasing to the next tier is an option in the config. To run, simply enter:
+The first program is autoTier. This will automatically tier-up your crops, terminating once the max breeding round is reached (configurable) or the storage farm is full. A storage chest is recommended for this program. Note that unrecognized crops will be moved to the storage farm first before replacing any of the lower tier crops in the working farm. Statting-up crops during this program is a configurable option. To run, simply enter:
 
     autoTier
 
-The second program is autoStat. This will automatically stat up your crops, terminating once Gr + Ga - Re is at least 50 (configurable) for all crops on the working farm. A trash can is recommended for this program. Note that growth is capped at 21 and anything higher will be flagged as a weed. To run, simply enter:
+The second program is autoStat. This will automatically stat-up your crops, terminating once Gr + Ga - Re is at least 52 (configurable) for all crops on the working farm. A trash can is recommended for this program. Maximum growth and resistance are also configurable options which default to 21 and 2, respectively. To run, simply enter:
 
     autoStat
 
-The third program is autoSpread. This will automatically spread (duplicate) your crops if each new Gr + Ga - Re is at least 46 (configurable), terminating once the storage farm is full. A trash can is recommended for this program. Note that growth is capped at 21 and anything higher will be flagged as a weed. To run, simply enter:
+The third program is autoSpread. This will automatically spread (duplicate) your crops if each new Gr + Ga - Re is at least 46 (configurable), terminating once the storage farm is full. A trash can is recommended for this program. Maximum growth and resistance are also configurable options which default to 21 and 2, respectively. To run, simply enter:
 
     autoSpread
 
-Fire and Forget. If you have brand new crops (ie. 1/1/1 spruce saplings) and want to automatically run autoSpread after autoStat:
+Fire and Forget. If you have brand new crops (ie. 1/1/1 spruce saplings) and want to automatically stat-up and start spreading:
 
     autoStat && autoSpread
 
 ## Other Helpful Commands
 
-To list all of the files installed on the robot
+To list all of the files installed on the robot, enter
 
     ls
 
-To remove any file installed on the robot
+To remove any one file installed on the robot, enter
 
     rm <filename>
 
 To uninstall all of the files from this repo, enter
 
     uninstall
-
-To run without cleanup for some reason, type ANYTHING after the program name. If left alone, this will leave your entire working farm susceptible to weeds.
-
-    autoSpread nocleanup
 
 ## Thanks
 
@@ -105,13 +107,14 @@ My repo is a fork from https://github.com/huchenlei/auto-crossbreeding/tree/impr
 
 If you are familiar with the older versions of this code then here are some notable changes that motivated me to develop this fork in the first place.
 
-- Revamped layout to access chests more easily.
-- Uses dirt instead of fertilized dirt for crops requiring a particular block underneath, and faster growth.
-- Moving crops is now more efficient which allows the robot to scan the farm quicker and prevent weeding.
-- "docleanup" is no longer a flag that needs to be raised. It will do this automatically unless ANY argument is given.
+- Changed general layout to access chests more easily.
+- Changed farm layout to facilitate running autoSpread immediately after autoStat.
+- Added the option to use regular dirt instead of fertilized dirt for crops requiring a particular block underneath.
+- Added configurable maximum growth and maximum resistance stats.
+- Added configurable thresholds for autoSpread and autoStat.
+- Added configurable option to stat-up crops while running autoTier.
+- Added configurable option to cleanup after complete (no longer a flag).
+- Added a built-in storage reset to prevent having to break the robot in order to run autoSpread or autoTier more than once.
+- Added an uninstall script.
+- Code is a LOT cleaner and more organized.
 - It is no longer the code's fault if any of the programs crash.
-- It is no longer necessary to break the robot after the storage farm is full in order to run autoSpread or autoTier again.
-- All of the programs run on the same layout to facilitate running autoSpread immediately after autoStat.
-- Included changing the threshold for autoSpread and autoStat directly from the config and the option to stat-up crops while running autoTier.
-- Included an uninstall script.
-- Code is generally cleaner and more organized with a lot of fluff removed.

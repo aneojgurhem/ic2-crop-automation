@@ -1,13 +1,13 @@
-local component = require("component")
-local robot = require("robot")
-local sides = require("sides")
-local computer = require("computer")
-local os = require("os")
-local gps = require("gps")
-local config = require("config")
-local signal = require("signal")
-local scanner = require("scanner")
-local posUtil = require("posUtil")
+local component = require('component')
+local robot = require('robot')
+local sides = require('sides')
+local computer = require('computer')
+local os = require('os')
+local gps = require('gps')
+local config = require('config')
+local signal = require('signal')
+local scanner = require('scanner')
+local posUtil = require('posUtil')
 local inventory_controller = component.inventory_controller
 
 
@@ -154,7 +154,7 @@ local function transplant(src, dest)
     -- TRANSFER CROP TO DESTINATION
     robot.useDown(sides.down, true)
     gps.go(dest)
-    if scanner.scan().name == "air" then
+    if scanner.scan().name == 'air' then
         placeCropStick()
     end
     robot.useDown(sides.down, true)
@@ -162,6 +162,7 @@ local function transplant(src, dest)
     signal.pulseDown()
 
     -- DESTROY ORIGINAL CROP
+    inventory_controller.equip()
     gps.go(config.relayFarmlandPos)
     deweed()
     robot.swingDown()
@@ -169,7 +170,6 @@ local function transplant(src, dest)
         robot.suckDown()
     end
 
-    inventory_controller.equip()
     gps.resume()
     robot.select(selectedSlot)
 end

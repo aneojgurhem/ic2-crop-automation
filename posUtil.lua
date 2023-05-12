@@ -1,4 +1,4 @@
-local config = require("config")
+local config = require('config')
 
 -- ======================== WORKING FARM ========================
 --  _________________
@@ -69,7 +69,7 @@ local function storageSlotToPos(slot)
     local y
 
     if x % 2 == 1 then
-        y = -Row + config.storageFarmSize - 2
+        y = -Row + config.storageFarmSize - 3
     else
         y = Row - 2
     end

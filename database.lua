@@ -1,8 +1,8 @@
-local gps = require("gps")
-local posUtil = require("posUtil")
-local action = require("action")
-local scanner = require("scanner")
-local config = require("config")
+local gps = require('gps')
+local posUtil = require('posUtil')
+local action = require('action')
+local scanner = require('scanner')
+local config = require('config')
 local storage = {}
 local reverseStorage = {}
 local farm = {}
@@ -26,7 +26,7 @@ local function scanFarm()
         gps.go(posUtil.workingSlotToPos(slot))
 
         local cropInfo = scanner.scan()
-        if cropInfo.name == "air" then
+        if cropInfo.name == 'air' then
             cropInfo.tier = 0
             cropInfo.gr = 0
             cropInfo.ga = 0
@@ -63,7 +63,7 @@ local function scanStorage()
     for slot=1, config.storageFarmArea do
         gps.go(posUtil.storageSlotToPos(slot))
         local cropInfo = scanner.scan()
-        if cropInfo.name ~= "air" then
+        if cropInfo.name ~= 'air' then
             storage[slot] = cropInfo
             reverseStorage[cropInfo.name] = slot
         else
@@ -164,7 +164,7 @@ local function scanMultifarm()
         local nextGlobalPos = posUtil.multifarmPosToGlobalPos(nextPos)
         gps.go(nextGlobalPos)
         local cropInfo = scanner.scan()
-        if cropInfo.name == "air" then
+        if cropInfo.name == 'air' then
             break
         else
             updateMultifarm(nextPos)

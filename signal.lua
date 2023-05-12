@@ -1,6 +1,6 @@
-local component = require("component")
-local sides = require("sides")
-local os = require("os")
+local component = require('component')
+local sides = require('sides')
+local os = require('os')
 local redstone = component.redstone
 
 
