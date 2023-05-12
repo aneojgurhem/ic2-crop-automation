@@ -29,7 +29,7 @@ local function workingSlotToPos(slot)
     local y
 
     if x % 2 == 1 then
-        y = config.workingFarmSize - Row
+        y = -Row + config.workingFarmSize
     else
         y = Row + 1
     end
@@ -69,7 +69,7 @@ local function storageSlotToPos(slot)
     local y
 
     if x % 2 == 1 then
-        y = -Row + 7
+        y = -Row + config.storageFarmSize - 2
     else
         y = Row - 2
     end
