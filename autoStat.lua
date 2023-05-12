@@ -12,10 +12,11 @@ local targetCrop
 -- ==================== HANDLING STATS ======================
 
 local function updateLowest()
-    lowestStat = 64
+    lowestStat = 99
     lowestStatSlot = 0
     local farm = database.getFarm()
 
+    -- Find lowest stat slot
     for slot=1, config.workingFarmArea, 2 do
         local crop = farm[slot]
 

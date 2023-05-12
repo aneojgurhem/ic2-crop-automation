@@ -14,27 +14,26 @@ local breedRound
 -- ==================== HANDLING TIERS ======================
 
 local function updateLowest()
-    lowestTier = 64
+    lowestTier = 99
     lowestTierSlot = 0
-    lowestStat = 64
+    lowestStat = 99
     lowestStatSlot = 0
     local farm = database.getFarm()
 
-    -- Find lowest tier slot.
+    -- Find lowest tier slot
     for slot=1, config.workingFarmArea, 2 do
         local crop = farm[slot]
-        if crop == nil then
-            lowestTierSlot = slot
-            lowestStatSlot = slot
-            return
-        end
 
-        if crop.tier < lowestTier then
-            lowestTier = crop.tier
-            lowestTierSlot = slot
+        if crop ~= nil then
+            if crop.name == 'crop' then
+                lowestTierSlot = slot
+                break
+            elseif crop.tier < lowestTier then
+                lowestTier = crop.tier
+                lowestTierSlot = slot
+            end
         end
     end
-
 
     -- Find lowest stats slot amongst the lowest tier crops
     if config.statWhileTiering then
@@ -110,8 +109,7 @@ local function tierOnce()
     for slot=1, config.workingFarmArea, 1 do
 
         -- Terminal Condition
-        breedRound = breedRound + 1
-        if (config.maxBreedRound and breedRound > config.maxBreedRound) then
+        if (breedRound > config.maxBreedRound) then
             print('autoTier: Max Round Reached!')
             return true
         end
@@ -144,9 +142,8 @@ end
 local function init()
     database.resetStorage()
     database.scanFarm()
-    updateLowest()
 
-    action.restockAll()
+    updateLowest()
     breedRound = 0
 end
 
@@ -156,6 +153,7 @@ local function main()
 
     -- Loop
     while not tierOnce() do
+        breedRound = breedRound + 1
         action.restockAll()
     end
 
