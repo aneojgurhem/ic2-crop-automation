@@ -51,24 +51,7 @@ local config = {
     -- The slot for crop sticks
     stickSlot = -2,
     -- The slot which the robot will stop storing items
-    storageStopSlot = -3,
-
-
-    multifarmCentorOffset = {-3, 4},
-    multifarmDislocatorPoses = {
-        {2, 0},
-        {0, -2},
-        {-2, 0},
-        {0, 2}
-    },
-    multifarmRelayFarmlandPoses = {
-        {3, 0},
-        {0, -3},
-        {-3, 0},
-        {0, 3}
-    },
-    multifarmSize = 20,
-    elevatorPos = {0, 4}
+    storageStopSlot = -3
 }
 
 config.workingFarmArea = config.workingFarmSize^2

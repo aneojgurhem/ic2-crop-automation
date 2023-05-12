@@ -85,7 +85,7 @@ local function spreadOnce()
 
         -- Terminal Condition
         if #database.getStorage() >= config.storageFarmArea then
-            print('Storage Full!')
+            print('autoSpread: Storage Full!')
             return true
         end
 
@@ -109,12 +109,11 @@ end
 -- ======================== MAIN ========================
 
 local function init()
-    print('Beginning Initial Scan')
     database.resetStorage()
     database.scanFarm()
 
     targetCrop = database.getFarm()[1].name
-    print(string.format('Target Crop Recognized: %s', targetCrop))
+    print(string.format('autoSpread: Target %s', targetCrop))
 end
 
 
@@ -131,7 +130,7 @@ local function main()
         action.cleanUp()
     end
 
-    print('autoSpread Complete!')
+    print('autoSpread: Complete!')
 end
 
 main()

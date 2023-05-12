@@ -6,7 +6,6 @@ local config = require('config')
 local storage = {}
 local reverseStorage = {}
 local farm = {}
-local lastMultifarmPos = {0, 0}
 
 -- ======================== WORKING FARM ========================
 
@@ -100,81 +99,6 @@ local function nextStorageSlot()
     end
 end
 
--- ========================= MULTI FARM =========================
-
-local function getLastMultifarmPos()
-    return lastMultifarmPos
-end
-
-
-local function setLastMultifarmPos(pos)
-    lastMultifarmPos = pos
-end
-
-
-local function nextMultifarmPos()
-    local x = lastMultifarmPos[1]
-    local y = lastMultifarmPos[2]
-
-    if posUtil.multifarmPosIsRelayFarmland(lastMultifarmPos) then
-        return posUtil.nextRelayFarmland(lastMultifarmPos)
-    end
-
-    local d = math.abs(x) + math.abs(y)
-    local nextPossiblePos
-
-    if x == 0 and y == 0 then
-        nextPossiblePos = {0, 4}
-    elseif x == -1 and y == d - 1 then
-        if d == config.multifarmSize then
-            return posUtil.nextRelayFarmland()
-        else
-            nextPossiblePos = {0, d+1}
-        end
-    elseif x >= 0 and y > 0 then
-        nextPossiblePos = {x+1, y-1}
-    elseif x > 0 and y <= 0 then
-        nextPossiblePos = {x-1, y-1}
-    elseif x <= 0 and y < 0 then
-        nextPossiblePos = {x-1, y+1}
-    elseif x < 0 and y >= 0 then
-        nextPossiblePos = {x+1, y+1}
-    end
-
-    if posUtil.multifarmPosIsRelayFarmland(nextPossiblePos) or not posUtil.multifarmPosInFarm(nextPossiblePos) then
-        lastMultifarmPos = nextPossiblePos
-        return nextMultifarmPos()
-    else
-        return nextPossiblePos
-    end
-end
-
-
-local function updateMultifarm(pos)
-    lastMultifarmPos = pos
-end
-
-
-local function scanMultifarm()
-    gps.save()
-    gps.go(config.elevatorPos)
-    gps.down(3)
-    while true do
-        local nextPos = nextMultifarmPos()
-        local nextGlobalPos = posUtil.multifarmPosToGlobalPos(nextPos)
-        gps.go(nextGlobalPos)
-        local cropInfo = scanner.scan()
-        if cropInfo.name == 'air' then
-            break
-        else
-            updateMultifarm(nextPos)
-        end
-    end
-    gps.go(config.elevatorPos)
-    gps.up(3)
-    gps.resume()
-end
-
 
 return {
     getFarm = getFarm,
@@ -186,10 +110,5 @@ return {
     scanStorage = scanStorage,
     existInStorage = existInStorage,
     notWater = notWater,
-    nextStorageSlot = nextStorageSlot,
-    getLastMultifarmPos = getLastMultifarmPos,
-    setLastMultifarmPos = setLastMultifarmPos,
-    nextMultifarmPos = nextMultifarmPos,
-    updateMultifarm = updateMultifarm,
-    scanMultifarm = scanMultifarm
+    nextStorageSlot = nextStorageSlot
 }
