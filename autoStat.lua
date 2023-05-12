@@ -90,7 +90,7 @@ local function statOnce()
 
         -- Terminal Condition
         if lowestStat >= config.autoStatThreshold then
-            print('Minimum Stat Threshold Reached!')
+            print('autoStat: Minimum Stat Threshold Reached!')
             return true
         end
 
@@ -114,12 +114,11 @@ end
 -- ======================== MAIN ========================
 
 local function init()
-    print('Beginning Initial Scan')
     database.scanFarm()
     updateLowest()
 
     targetCrop = database.getFarm()[1].name
-    print(string.format('Target Crop Recognized: %s', targetCrop))
+    print(string.format('autoStat: Target %s', targetCrop))
 end
 
 
@@ -136,7 +135,7 @@ local function main()
         action.cleanUp()
     end
 
-    print('autoStat Complete!')
+    print('autoStat: Complete!')
 end
 
 main()
