@@ -126,7 +126,7 @@ If you are familiar with the older versions of this code then here are some nota
 - Changed farm layout to facilitate running autoSpread immediately after autoStat.
 - Added the option to use regular dirt instead of fertilized dirt for crops requiring a particular block underneath.
 - Added configurable maximum growth and maximum resistance stats.
-- Added configurable thresholds for autoSpread and autoStat.
+- Added configurable thresholds for autoSpread, autoStat, and autoTier.
 - Added configurable option to stat-up crops while running autoTier.
 - Added configurable option to cleanup after complete (no longer a flag).
 - Added a built-in storage reset to prevent having to break the robot in order to run autoSpread or autoTier more than once.
