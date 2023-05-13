@@ -109,7 +109,7 @@ For starters, I recommend statting-up and spreading the following crops because 
 - Sugarbeet for sugar (oxygen)
 - Rape for seed oil
 - Goldfish plant for fish oil
-- Tearstalks for ghast tears (chlorine and sodium hydroxide)
+- Salty root for salt (chlorine and sodium)
 - Enderbloom for enderpearls/endereyes
 - Diareed for diamonds
 - Bobsyeruncleranks for emeralds
