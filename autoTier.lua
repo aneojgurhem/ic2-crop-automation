@@ -73,7 +73,7 @@ local function checkChildren(slot, crop)
                 action.placeCropStick(2)
                 database.updateFarm(lowestTierSlot, crop)
                 updateLowest()
- 
+
             elseif (config.statWhileTiering and crop.tier == lowestTier and stat > lowestStat) then
                 action.transplant(posUtil.workingSlotToPos(slot), posUtil.workingSlotToPos(lowestStatSlot))
                 action.placeCropStick(2)
@@ -117,6 +117,12 @@ local function tierOnce()
         -- Terminal Condition
         if #database.getStorage() >= config.storageFarmArea then
             print('autoTier: Storage Full!')
+            return true
+        end
+
+        -- Terminal Condition
+        if lowestTier >= config.autoTierThreshold then
+            print('autoTier: Minimum Tier Threshold Reached!')
             return true
         end
 

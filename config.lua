@@ -14,6 +14,9 @@ local config = {
     maxGrowth = 21,
     -- Maximum Resistance Stat
     maxResistance = 2,
+
+    -- Minimum tier for the working farm during autoTier
+    autoTierThreshold = 13,
     -- Minimum Gr + Ga - Re for the working farm during autoStat (21 + 31 - 0 = 52)
     autoStatThreshold = 52,
     -- Minimum Gr + Ga - Re for the storage farm during autoSpread (21 + 31 - 0 = 52)
