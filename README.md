@@ -12,6 +12,7 @@ Obtaining these components will require access to EV circuits and epoxid (late H
 - Central Processing Unit (Tier 2)
 - Graphics Card (Tier 1)
 - Redstone Card (Tier 1)
+- Internet Card
 - Memory (Tier 2)
 - EEPROM (Lua BIOS)
 - Hard Disk Drive (Tier 1, 1MB)
@@ -21,7 +22,6 @@ Obtaining these components will require access to EV circuits and epoxid (late H
 - Keyboard
 - Geolyzer
 - Disk Drive
-- Internet Card
 - OpenOS (Operating System)
 
 Lastly, you need a Transvector Binder and Transvector Dislocator which requires some progression in Thaumcraft. However, it is not too deep and completely doable if you are already able to make EV circuits and epoxid. Transvector Dislocator can be found under "Thaumic Tinkerer" and requires the following prerequisites on the same tab: Transvector Interface and Smokey Quartz. You will also need to complete research on Mirror Magic under "Artifice." For more information, visit https://gtnh.miraheze.org/wiki/Thaumcraft_Research_Cheatsheet.
