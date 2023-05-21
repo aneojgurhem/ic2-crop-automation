@@ -6,13 +6,18 @@ local config = require('config')
 
 local function scan()
     local rawResult = geolyzer.analyze(sides.down)
+
+    -- AIR
     if rawResult.name == 'minecraft:air' or rawResult.name == 'GalacticraftCore:tile.brightAir' then
-        return {isCrop=false, name='air'}
+        return {isCrop=true, name='air'}
+
     elseif rawResult.name == 'IC2:blockCrop' then
+
+        -- EMPTY CROP STICK
         if rawResult['crop:name'] == nil then
-            return {isCrop=false, name='crop'}
-        elseif rawResult['crop:name'] == 'weed' then
-            return {isCrop=true, name='weed'}
+            return {isCrop=true, name='emptyCrop'}
+
+        -- FILLED CROP STICK
         else
             return {
                 isCrop=true,
@@ -23,6 +28,8 @@ local function scan()
                 tier = rawResult['crop:tier']
             }
         end
+
+    -- RANDOM BLOCK
     else
         return {isCrop=false, name=rawResult.name}
     end

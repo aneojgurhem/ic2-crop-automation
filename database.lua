@@ -23,17 +23,8 @@ local function scanFarm()
     gps.save()
     for slot=1, config.workingFarmArea, 2 do
         gps.go(posUtil.workingSlotToPos(slot))
-
-        local cropInfo = scanner.scan()
-        if cropInfo.name == 'air' then
-            cropInfo.tier = 0
-            cropInfo.gr = 0
-            cropInfo.ga = 0
-            cropInfo.re = 100
-            farm[slot] = cropInfo
-        elseif cropInfo.isCrop then
-            farm[slot] = cropInfo
-        end
+        local crop = scanner.scan()
+            farm[slot] = crop
     end
     action.restockAll()
     gps.resume()
@@ -57,22 +48,6 @@ local function addToStorage(crop)
 end
 
 
-local function scanStorage()
-    gps.save()
-    for slot=1, config.storageFarmArea do
-        gps.go(posUtil.storageSlotToPos(slot))
-        local cropInfo = scanner.scan()
-        if cropInfo.name ~= 'air' then
-            storage[slot] = cropInfo
-            reverseStorage[cropInfo.name] = slot
-        else
-            break
-        end
-    end
-    gps.resume()
-end
-
-
 local function existInStorage(crop)
     if reverseStorage[crop.name] then
         return true
@@ -82,20 +57,45 @@ local function existInStorage(crop)
 end
 
 
-local function notWater(slot)
-    if (slot == 21) or (slot == 25) or (slot == 57) or (slot == 61) then
-        return false
-    else
-        return true
+local function water(slot)
+    if config.storageFarmSize == 7 then
+        if (slot == 17) or (slot == 19) or (slot == 31) or (slot == 33) then
+            return true
+        else
+            return false
+        end
+
+    elseif config.storageFarmSize == 9 then
+        if (slot == 21) or (slot == 25) or (slot == 57) or (slot == 61) then
+            return true
+        else
+            return false
+        end
+
+    elseif config.storageFarmSize == 11 then
+        if (slot == 25) or (slot == 31) or (slot == 91) or (slot == 97) then
+            return true
+        else
+            return false
+        end
+
+    elseif config.storageFarmSize == 13 then
+        if (slot == 29) or (slot == 33) or (slot == 37) or (slot == 61)
+        or (slot == 81) or (slot == 85) or (slot == 89) or (slot == 133)
+        or (slot == 133) or (slot == 137) then
+            return true
+        else
+            return false
+        end
     end
 end
 
 
 local function nextStorageSlot()
-    if notWater(#storage + 1) then
-        return #storage + 1
-    else
+    if water(#storage + 1) then
         return #storage + 2
+    else
+        return #storage + 1
     end
 end
 
@@ -107,8 +107,7 @@ return {
     getStorage = getStorage,
     resetStorage = resetStorage,
     addToStorage = addToStorage,
-    scanStorage = scanStorage,
     existInStorage = existInStorage,
-    notWater = notWater,
+    notWater = water,
     nextStorageSlot = nextStorageSlot
 }

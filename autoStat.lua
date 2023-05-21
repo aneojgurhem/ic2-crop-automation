@@ -1,29 +1,28 @@
-local robot = require('robot')
 local gps = require('gps')
 local action = require('action')
 local database = require('database')
 local scanner = require('scanner')
 local posUtil = require('posUtil')
 local config = require('config')
-local lowestStat
-local lowestStatSlot
+local lowestStat = 0
+local lowestStatSlot = 0
 local targetCrop
 
 -- ==================== HANDLING STATS ======================
 
 local function updateLowest()
-    lowestStat = 99
-    lowestStatSlot = 0
     local farm = database.getFarm()
 
     -- Find lowest stat slot
     for slot=1, config.workingFarmArea, 2 do
         local crop = farm[slot]
+        if crop.isCrop then
 
-        if crop ~= nil then
-            if crop.name == 'crop' then
+            if crop.name == 'air' or crop.name == 'emptyCrop' then
+                lowestStat = 0
                 lowestStatSlot = slot
                 break
+
             else
                 local stat = crop.gr + crop.ga - crop.re
                 if stat < lowestStat then
@@ -37,15 +36,16 @@ end
 
 -- ====================== SCANNING ======================
 
-local function checkChildren(slot, crop)
-    if crop.name == 'air' then
-        action.placeCropStick(2)
+local function checkChild(slot, crop)
+    if crop.isCrop then
 
-    elseif (not config.assumeNoBareStick) and crop.name == 'crop' then
-        action.placeCropStick()
+        if crop.name == 'air' then
+            action.placeCropStick(2)
 
-    elseif crop.isCrop then
-        if scanner.isWeed(crop) then
+        elseif crop.name == 'emptyCrop' then
+            action.placeCropStick()
+
+        elseif scanner.isWeed(crop) then
             action.deweed()
             action.placeCropStick()
 
@@ -77,9 +77,19 @@ end
 
 
 local function checkParent(slot, crop)
-    if crop.isCrop and scanner.isWeed(crop) then
-        action.deweed()
-        database.updateFarm(slot, 'crop')
+    if crop.isCrop then
+
+        if crop.name == 'air' or crop.name == 'emptyCrop' then
+            database.updateFarm(slot, crop)
+
+        elseif scanner.isWeed(crop) then
+            action.deweed()
+            database.updateFarm(slot, {isCrop=true, name='emptyCrop'})
+
+        else
+            database.updateFarm(slot, crop)
+
+        end
         updateLowest()
     end
 end
@@ -100,7 +110,7 @@ local function statOnce()
         local crop = scanner.scan()
 
         if slot % 2 == 0 then
-            checkChildren(slot, crop)
+            checkChild(slot, crop)
         else
             checkParent(slot, crop)
         end

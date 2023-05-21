@@ -123,13 +123,13 @@ end
 
 local function deweed()
     local selectedSlot = robot.select()
-    if config.KeepDrops and fullInventory() then
+    if config.keepDrops and fullInventory() then
         dumpInventory()
     end
     robot.select(robot.inventorySize()+config.spadeSlot)
     inventory_controller.equip()
     robot.useDown()
-    if config.KeepDrops then
+    if config.keepDrops then
         robot.suckDown()
     end
     inventory_controller.equip()
@@ -175,62 +175,6 @@ local function transplant(src, dest)
 end
 
 
-local function transplantToMultifarm(src, dest)
-    local globalDest = posUtil.multifarmPosToGlobalPos(dest)
-    local optimalDislocatorSet = posUtil.findOptimalDislocator(dest)
-    local dislocatorPos = optimalDislocatorSet[1]
-    local relayFarmlandPos = optimalDislocatorSet[2]
-
-    local selectedSlot = robot.select()
-    gps.save()
-
-    if robot.count(robot.inventorySize()+config.stickSlot) < 2 then
-        restockStick()
-    end
-
-    robot.select(robot.inventorySize()+config.binderSlot)
-    inventory_controller.equip()
-
-    -- transfer the crop to the relay location
-    gps.go(config.elevatorPos)
-    gps.down(3)
-    gps.go(dislocatorPos)
-    robot.useDown(sides.down)
-
-    gps.go(config.elevatorPos)
-    gps.up(3)
-    gps.go(src)
-    robot.useDown(sides.down, true) -- sneak-right-click on crops to prevent harvesting
-
-    gps.go(config.elevatorPos)
-    gps.down(3)
-    gps.go(dislocatorPos)
-    signal.pulseDown()
-
-    if not (relayFarmlandPos[1] == globalDest[1] and relayFarmlandPos[2] == globalDest[2]) then
-
-        -- transfer the crop to the destination
-        robot.useDown(sides.down)
-        gps.go(globalDest)
-        placeCropStick()
-        robot.useDown(sides.down, true)
-        gps.go(dislocatorPos)
-        signal.pulseDown()
-
-        -- destroy the original crop
-        gps.go(relayFarmlandPos)
-        robot.swingDown()
-    end
-
-    gps.go(config.elevatorPos)
-    gps.up(3)
-
-    inventory_controller.equip()
-    gps.resume()
-    robot.select(selectedSlot)
-end
-
-
 local function cleanUp()
     for slot=2, config.workingFarmArea, 2 do
         gps.go(posUtil.workingSlotToPos(slot))
@@ -252,6 +196,5 @@ return {
     placeCropStick = placeCropStick,
     deweed = deweed,
     transplant = transplant,
-    transplantToMultifarm = transplantToMultifarm,
     cleanUp = cleanUp
 }

@@ -52,7 +52,7 @@ end
 
 -- ===================== SCANNING ======================
 
-local function checkChildren(slot, crop)
+local function checkChild(slot, crop)
     if crop.name == 'air' then
         action.placeCropStick(2)
 
@@ -131,7 +131,7 @@ local function tierOnce()
         local crop = scanner.scan()
 
         if slot % 2 == 0 then
-            checkChildren(slot, crop)
+            checkChild(slot, crop)
         else
             checkParent(slot, crop)
         end
