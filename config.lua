@@ -22,8 +22,6 @@ local config = {
     -- Minimum Gr + Ga - Re for the storage farm during autoSpread (21 + 31 - 0 = 52)
     autoSpreadThreshold = 46,
 
-    -- Assume there is no bare stick in the farm, should increase speed
-    assumeNoBareStick = true,
     -- Minimum Charge Level
     needChargeLevel = 0.2,
     -- Max breed round before termination. Set to nil for infinite loop
@@ -34,7 +32,7 @@ local config = {
     -- Side Length of Working Farm
     workingFarmSize = 6,
     -- Side Length of Storage Farm
-    storageFarmSize = 9,
+    storageFarmSize = 7,
 
     -- The coordinate for charger
     chargerPos = {0, 0},

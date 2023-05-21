@@ -15,10 +15,10 @@ local function workingSlotToPos(slot)
     local row = (slot - 1) % config.workingFarmSize
     local y
 
-    if x % 2 == 1 then
-        y = -row + config.workingFarmSize
-    else
+    if x % 2 == 0 then
         y = row + 1
+    else
+        y = -row + config.workingFarmSize
     end
 
     return {-x, y}
@@ -65,7 +65,9 @@ end
 -- |10 17 36 43 62 69 88 95 14 21 40 47 66|
 -- |09 18 35 44 61 70 87 96 13 22 39 48 65|
 -- |08 19 34 45 60 71 86 97 12 23 38 49 64|
+
 -- |07 20 33 46 59 72 85 98 11 24 37 50 63|
+
 -- |06 21 32 47 58 73 84 99 10 25 36 51 62|
 -- |05 22 31 48 57 74 83 00 09 26 35 52 61|
 -- |04 23 30 49 56 75 82 01 08 27 34 53 60|
@@ -79,10 +81,10 @@ local function storageSlotToPos(slot)
     local row = (slot - 1) % config.storageFarmSize
     local y
 
-    if x % 2 == 1 then
-        y = -row + config.storageFarmSize - 3
+    if x % 2 == 0 then
+        y = row - config.storageFarmSize + 7
     else
-        y = row - 2
+        y = config.storageFarmSize - row - 1
     end
 
     return {x, y}

@@ -1,4 +1,3 @@
-local robot = require('robot')
 local database = require('database')
 local gps = require('gps')
 local posUtil = require('posUtil')
@@ -29,7 +28,7 @@ local function checkChildren(slot, crop)
     if crop.name == 'air' then
         action.placeCropStick(2)
 
-    elseif (not config.assumeNoBareStick) and crop.name == 'crop' then
+    elseif crop.name == 'emptyCrop' then
         action.placeCropStick()
 
     elseif crop.isCrop then

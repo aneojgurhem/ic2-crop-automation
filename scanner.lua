@@ -1,7 +1,7 @@
 local component = require('component')
-local geolyzer = component.geolyzer
 local sides = require('sides')
 local config = require('config')
+local geolyzer = component.geolyzer
 
 
 local function scan()
@@ -31,7 +31,7 @@ local function scan()
 
     -- RANDOM BLOCK
     else
-        return {isCrop=false, name=rawResult.name}
+        return {isCrop=false, name='block'}
     end
 end
 
