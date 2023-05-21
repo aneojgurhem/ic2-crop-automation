@@ -19,13 +19,13 @@ end
 
 
 local function scanFarm()
-    gps.save()
+    -- gps.save()
     for slot=1, config.workingFarmArea, 2 do
         gps.go(posUtil.workingSlotToPos(slot))
         local crop = scanner.scan()
             farm[slot] = crop
     end
-    gps.resume()
+    -- gps.resume()
 end
 
 -- ======================== STORAGE FARM ========================

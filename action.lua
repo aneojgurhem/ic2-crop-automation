@@ -32,27 +32,16 @@ local function fullInventory()
 end
 
 
-local function charge(resume)
-    if resume ~= false then
-        gps.save()
-    end
-
+local function charge()
     gps.go(config.chargerPos)
     repeat
         os.sleep(0.5)
     until fullyCharged()
-
-    if resume ~= false then
-        gps.resume()
-    end
 end
 
 
-local function restockStick(resume)
+local function restockStick()
     local selectedSlot = robot.select()
-    if resume ~= false then
-        gps.save()
-    end
 
     gps.go(config.stickContainerPos)
     robot.select(robot.inventorySize()+config.stickSlot)
@@ -63,18 +52,12 @@ local function restockStick(resume)
         end
     end
 
-    if resume ~= false then
-        gps.resume()
-    end
     robot.select(selectedSlot)
 end
 
 
-local function dumpInventory(resume)
+local function dumpInventory()
     local selectedSlot = robot.select()
-    if resume ~= false then
-        gps.save()
-    end
 
     gps.go(config.storagePos)
     for i=1, (robot.inventorySize() + config.storageStopSlot) do
@@ -89,17 +72,14 @@ local function dumpInventory(resume)
         end
     end
 
-    if resume ~= false then
-        gps.resume()
-    end
     robot.select(selectedSlot)
 end
 
 
 local function restockAll()
-    dumpInventory(false)
-    restockStick(false)
-    charge(false)
+    dumpInventory()
+    restockStick()
+    charge()
     gps.turnTo(1)
 end
 
