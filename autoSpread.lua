@@ -66,9 +66,11 @@ end
 
 
 local function checkParent(slot, crop)
-    if crop.isCrop and scanner.isWeed(crop) then
-        action.deweed()
-        database.updateFarm(slot, {isCrop=true, name='emptyCrop'})
+    if crop.isCrop and crop.name ~= 'air' and crop.name ~= 'emptyCrop' then
+        if scanner.isWeed(crop) then
+            action.deweed()
+            database.updateFarm(slot, {isCrop=true, name='emptyCrop'})
+        end
     end
 end
 
