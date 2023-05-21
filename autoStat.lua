@@ -42,9 +42,6 @@ local function checkChild(slot, crop)
         if crop.name == 'air' then
             action.placeCropStick(2)
 
-        elseif crop.name == 'emptyCrop' then
-            action.placeCropStick()
-
         elseif scanner.isWeed(crop) then
             action.deweed()
             action.placeCropStick()
@@ -77,19 +74,9 @@ end
 
 
 local function checkParent(slot, crop)
-    if crop.isCrop then
-
-        if crop.name == 'air' or crop.name == 'emptyCrop' then
-            database.updateFarm(slot, crop)
-
-        elseif scanner.isWeed(crop) then
-            action.deweed()
-            database.updateFarm(slot, {isCrop=true, name='emptyCrop'})
-
-        else
-            database.updateFarm(slot, crop)
-
-        end
+    if crop.isCrop and scanner.isWeed(crop) then
+        action.deweed()
+        database.updateFarm(slot, {isCrop=true, name='emptyCrop'})
         updateLowest()
     end
 end
@@ -102,7 +89,7 @@ local function statOnce()
         -- Terminal Condition
         if lowestStat >= config.autoStatThreshold then
             print('autoStat: Minimum Stat Threshold Reached!')
-            return true
+            return false
         end
 
         -- Scan
@@ -119,7 +106,7 @@ local function statOnce()
             action.charge()
         end
     end
-    return false
+    return true
 end
 
 -- ======================== MAIN ========================
@@ -137,7 +124,7 @@ local function main()
     init()
 
     -- Loop
-    while not statOnce() do
+    while statOnce() do
         action.restockAll()
     end
 

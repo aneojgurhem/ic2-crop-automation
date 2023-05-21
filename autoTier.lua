@@ -1,45 +1,37 @@
-local robot = require('robot')
 local gps = require('gps')
 local action = require('action')
 local database = require('database')
 local scanner = require('scanner')
 local posUtil = require('posUtil')
 local config = require('config')
-local lowestTier
-local lowestTierSlot
-local lowestStat
-local lowestStatSlot
-local breedRound
+local lowestTier = 0
+local lowestTierSlot = 0
+local lowestStat = 0
+local lowestStatSlot = 0
+local breedRound = 0
 
 -- ==================== HANDLING TIERS ======================
 
 local function updateLowest()
-    lowestTier = 99
-    lowestTierSlot = 0
-    lowestStat = 99
-    lowestStatSlot = 0
     local farm = database.getFarm()
 
     -- Find lowest tier slot
     for slot=1, config.workingFarmArea, 2 do
         local crop = farm[slot]
+        if crop.isCrop then
 
-        if crop ~= nil then
-            if crop.name == 'crop' then
+            if crop.name == 'air' or crop.name == 'emptyCrop' then
+                lowestTier = 0
                 lowestTierSlot = slot
+                lowestStat = 0
+                lowestStatSlot = slot
                 break
+
             elseif crop.tier < lowestTier then
                 lowestTier = crop.tier
                 lowestTierSlot = slot
-            end
-        end
-    end
 
-    -- Find lowest stats slot amongst the lowest tier crops
-    if config.statWhileTiering then
-        for slot=1, config.workingFarmArea, 2 do
-            local crop = farm[slot]
-            if (crop ~= nil and crop.tier == lowestTier) then
+            elseif config.stateWhileTiering and crop.tier == lowestTier then
                 local stat = crop.gr + crop.ga - crop.re
                 if stat < lowestStat then
                     lowestStat = stat
@@ -53,14 +45,12 @@ end
 -- ===================== SCANNING ======================
 
 local function checkChild(slot, crop)
-    if crop.name == 'air' then
-        action.placeCropStick(2)
+    if crop.isCrop then
 
-    elseif (not config.assumeNoBareStick) and crop.name == 'crop' then
-        action.placeCropStick()
+        if crop.name == 'air' then
+            action.placeCropStick(2)
 
-    elseif crop.isCrop then
-        if scanner.isWeed(crop) then
+        elseif scanner.isWeed(crop) then
             action.deweed()
             action.placeCropStick()
 
@@ -111,19 +101,19 @@ local function tierOnce()
         -- Terminal Condition
         if (breedRound > config.maxBreedRound) then
             print('autoTier: Max Round Reached!')
-            return true
+            return false
         end
 
         -- Terminal Condition
         if #database.getStorage() >= config.storageFarmArea then
             print('autoTier: Storage Full!')
-            return true
+            return false
         end
 
         -- Terminal Condition
         if lowestTier >= config.autoTierThreshold then
             print('autoTier: Minimum Tier Threshold Reached!')
-            return true
+            return false
         end
 
         -- Scan
@@ -140,7 +130,7 @@ local function tierOnce()
             action.charge()
         end
     end
-    return false
+    return true
 end
 
 -- ====================== MAIN ======================
@@ -150,7 +140,6 @@ local function init()
     database.scanFarm()
 
     updateLowest()
-    breedRound = 0
 end
 
 
@@ -158,7 +147,7 @@ local function main()
     init()
 
     -- Loop
-    while not tierOnce() do
+    while tierOnce() do
         breedRound = breedRound + 1
         action.restockAll()
     end

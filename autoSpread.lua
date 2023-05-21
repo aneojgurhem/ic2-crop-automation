@@ -9,12 +9,12 @@ local targetCrop
 
 -- ================== HANDLING SPREAD ====================
 
-local function FindEmpty()
+local function findEmpty()
     local farm = database.getFarm()
 
     for slot=1, config.workingFarmArea, 2 do
         local crop = farm[slot]
-        if crop == 'empty' then
+        if crop == 'emptyCrop' then
             emptySlot = slot
             return true
         end
@@ -24,15 +24,13 @@ end
 
 -- ====================== SCANNING ======================
 
-local function checkChildren(slot, crop)
-    if crop.name == 'air' then
-        action.placeCropStick(2)
+local function checkChild(slot, crop)
+    if crop.isCrop then
 
-    elseif crop.name == 'emptyCrop' then
-        action.placeCropStick()
+        if crop.name == 'air' then
+            action.placeCropStick(2)
 
-    elseif crop.isCrop then
-        if scanner.isWeed(crop) then
+        elseif scanner.isWeed(crop) then
             action.deweed()
             action.placeCropStick()
 
@@ -41,7 +39,7 @@ local function checkChildren(slot, crop)
             if stat >= config.autoSpreadThreshold then
 
                 -- Make sure no parent on the working farm is empty
-                if FindEmpty() then
+                if findEmpty() then
                     action.transplant(posUtil.workingSlotToPos(slot), posUtil.workingSlotToPos(emptySlot))
                     action.placeCropStick(2)
                     database.updateFarm(emptySlot, crop)
@@ -68,12 +66,9 @@ end
 
 
 local function checkParent(slot, crop)
-    if crop.name == 'air' then
-        database.updateFarm(slot, 'empty')
-
-    elseif crop.isCrop and scanner.isWeed(crop) then
+    if crop.isCrop and scanner.isWeed(crop) then
         action.deweed()
-        database.updateFarm(slot, 'empty')
+        database.updateFarm(slot, {isCrop=true, name='emptyCrop'})
     end
 end
 
@@ -85,7 +80,7 @@ local function spreadOnce()
         -- Terminal Condition
         if #database.getStorage() >= config.storageFarmArea then
             print('autoSpread: Storage Full!')
-            return true
+            return false
         end
 
         -- Scan
@@ -93,7 +88,7 @@ local function spreadOnce()
         local crop = scanner.scan()
 
         if slot % 2 == 0 then
-            checkChildren(slot, crop)
+            checkChild(slot, crop)
         else
             checkParent(slot, crop)
         end
@@ -102,7 +97,7 @@ local function spreadOnce()
             action.charge()
         end
     end
-    return false
+    return true
 end
 
 -- ======================== MAIN ========================
@@ -120,7 +115,7 @@ local function main()
     init()
 
     -- Loop
-    while not spreadOnce() do
+    while spreadOnce() do
         action.restockAll()
     end
 
