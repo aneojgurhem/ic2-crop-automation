@@ -144,7 +144,7 @@ end
 local function init()
     database.resetStorage()
     database.scanFarm()
-
+    action.restockAll()
     updateLowest()
 end
 

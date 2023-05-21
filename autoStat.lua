@@ -117,6 +117,7 @@ end
 
 local function init()
     database.scanFarm()
+    action.restockAll()
     updateLowest()
 
     targetCrop = database.getFarm()[1].name

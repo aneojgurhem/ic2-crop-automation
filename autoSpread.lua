@@ -107,6 +107,7 @@ end
 local function init()
     database.resetStorage()
     database.scanFarm()
+    action.restockAll()
 
     targetCrop = database.getFarm()[1].name
     print(string.format('autoSpread: Target %s', targetCrop))
