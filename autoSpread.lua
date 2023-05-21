@@ -14,7 +14,7 @@ local function findEmpty()
 
     for slot=1, config.workingFarmArea, 2 do
         local crop = farm[slot]
-        if crop == 'emptyCrop' then
+        if crop.name == 'air' or crop.name == 'emptyCrop' then
             emptySlot = slot
             return true
         end
