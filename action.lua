@@ -160,7 +160,7 @@ local function transplant(src, dest)
     if crop.name == 'air' then
         placeCropStick()
 
-    elseif crop.name == 'block' then
+    elseif crop.isCrop == false then
         database.addToStorage(crop)
         gps.go(posUtil.storageSlotToPos(database.nextStorageSlot()))
         placeCropStick()
