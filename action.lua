@@ -8,6 +8,7 @@ local config = require('config')
 local signal = require('signal')
 local scanner = require('scanner')
 local posUtil = require('posUtil')
+local database = require('database')
 local inventory_controller = component.inventory_controller
 
 
@@ -154,9 +155,17 @@ local function transplant(src, dest)
     -- TRANSFER CROP TO DESTINATION
     robot.useDown(sides.down, true)
     gps.go(dest)
-    if scanner.scan().name == 'air' then
+
+    local crop = scanner.scan()
+    if crop.name == 'air' then
+        placeCropStick()
+
+    elseif crop.name == 'block' then
+        database.addToStorage(crop)
+        gps.go(posUtil.storageSlotToPos(database.nextStorageSlot()))
         placeCropStick()
     end
+
     robot.useDown(sides.down, true)
     gps.go(config.dislocatorPos)
     signal.pulseDown()
