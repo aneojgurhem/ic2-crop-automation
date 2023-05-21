@@ -4,14 +4,16 @@ local database = require('database')
 local scanner = require('scanner')
 local posUtil = require('posUtil')
 local config = require('config')
-local lowestStat = 0
-local lowestStatSlot = 0
+local lowestStat
+local lowestStatSlot
 local targetCrop
 
 -- ==================== HANDLING STATS ======================
 
 local function updateLowest()
     local farm = database.getFarm()
+    lowestStat = 99
+    lowestStatSlot = 0
 
     -- Find lowest stat slot
     for slot=1, config.workingFarmArea, 2 do

@@ -4,16 +4,20 @@ local database = require('database')
 local scanner = require('scanner')
 local posUtil = require('posUtil')
 local config = require('config')
-local lowestTier = 0
-local lowestTierSlot = 0
-local lowestStat = 0
-local lowestStatSlot = 0
 local breedRound = 0
+local lowestTier
+local lowestTierSlot
+local lowestStat
+local lowestStatSlot
 
 -- ==================== HANDLING TIERS ======================
 
 local function updateLowest()
     local farm = database.getFarm()
+    lowestTier = 99
+    lowestTierSlot = 0
+    lowestStat = 99
+    lowestStatSlot = 0
 
     -- Find lowest tier slot
     for slot=1, config.workingFarmArea, 2 do
