@@ -45,7 +45,7 @@ end
 -- ===================== SCANNING ======================
 
 local function checkChild(slot, crop)
-    if crop.isCrop then
+    if crop.isCrop and crop.name ~= 'emptyCrop' then
 
         if crop.name == 'air' then
             action.placeCropStick(2)
