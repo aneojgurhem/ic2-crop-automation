@@ -27,20 +27,32 @@ local function updateLowest()
             if crop.name == 'air' or crop.name == 'emptyCrop' then
                 lowestTier = 0
                 lowestTierSlot = slot
-                lowestStat = 0
-                lowestStatSlot = slot
                 break
 
             elseif crop.tier < lowestTier then
                 lowestTier = crop.tier
                 lowestTierSlot = slot
+            end
+        end
+    end
 
-            -- Find lowest stat slot amongst the lowest tier
-            elseif (config.statWhileTiering and crop.tier == lowestTier) then
-                local stat = crop.gr + crop.ga - crop.re
-                if stat < lowestStat then
-                    lowestStat = stat
+    -- Find lowest stat slot amongst the lowest tier
+    if config.statWhileTiering then
+        for slot=1, config.workingFarmArea, 2 do
+            local crop = farm[slot]
+            if crop.isCrop then
+
+                if crop.name == 'air' or crop.name == 'emptyCrop' then
+                    lowestStat = 0
                     lowestStatSlot = slot
+                    break
+
+                elseif crop.tier == lowestTier then
+                    local stat = crop.gr + crop.ga - crop.re
+                    if stat < lowestStat then
+                        lowestStat = stat
+                        lowestStatSlot = slot
+                    end
                 end
             end
         end
