@@ -1,6 +1,11 @@
 local config = {
     -- NOTE: EACH CONFIG SHOULD END WITH A COMMA
 
+    -- Side Length of Storage Farm
+    storageFarmSize = 9,
+    -- Side Length of Working Farm
+    workingFarmSize = 6,
+
     -- Once complete, remove all extra crop sticks to prevent the working farm from weeding
     cleanUp = true,
     -- Utilize storage chest (Don't Change)
@@ -28,11 +33,6 @@ local config = {
     maxBreedRound = 1000,
 
     -- =========== DO NOT CHANGE ===========
-
-    -- Side Length of Working Farm
-    workingFarmSize = 6,
-    -- Side Length of Storage Farm
-    storageFarmSize = 7,
 
     -- The coordinate for charger
     chargerPos = {0, 0},
