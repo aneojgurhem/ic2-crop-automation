@@ -53,9 +53,9 @@ Lastly, you need a Transvector Binder and Transvector Dislocator which requires 
 
 # Building the Farms
 
-First off, it is recommended to set everything up in a Jungle or Swamp biome at Y=130 as that will give you the highest humidity and air quality stats. This is most easily done in a personal dimension which you earn as a quest reward from reaching the moon. Do not place any solid blocks above the farm as that will reduce the air quality. All of the machines on the surface are waterproof so do not worry about the rain. Use vanilla dirt because that will allow you to grow crops that require a particular block underneath, and boost the nutrient stat of your crops. The whole farm will fit into a single chunk for easy chunk loading if the storage farm size is set to 9 or less. See image below.
+First off, it is recommended to set everything up in a Jungle or Swamp biome at Y=130 as that will give you the highest humidity and air quality stats. This is most easily done in a personal dimension which you earn as a quest reward from reaching the moon. Do not place any solid blocks above the farm as that will reduce the air quality. All of the machines on the surface are waterproof so do not worry about the rain. Use vanilla dirt because that will allow you to grow crops that require a particular block underneath, and boost the nutrient stat of your crops. The whole farm can easily fit into a single chunk for easy chunk loading.
 
-You MAY NOT change the size of the working farm, but you MAY change the size of the storage farm in the config (default is 9x9). Larger sizes will extend the farm down and to the right while smaller sizes will shrink the farm up and to the left (see image below). There is no maximum size for the storage farm, but the absolute minimum is 7. Do note that larger storage farm sizes will leave your working farm more susceptible to weeds because the robot will have to travel further when transporting crops which means less time spent scanning the working farm. Both even and odd sizes work. 
+You may change both the size of the working farm and the size of the storage farm in the config (default is 6x6 and 9x9, respectively). Larger working farm sizes will extend left and up while larger storage farm sizes will extend down and to the right (see image below). The top row of the working farm will always align with the top row of the storage farm. There is no maximum or minimum size for either farm and it does not matter if the lengths are even or odd. Note that larger storage farm sizes will leave your working farm more susceptible to weeds because the robot will have to travel further when transporting crops which means less time spent scanning the working farm. 
 
 ![Farm Top](media/Farm_Top.png?)
 
@@ -133,7 +133,7 @@ If you are familiar with the older versions of this code then here are some nota
 - Added configurable option to cleanup after complete (no longer a flag).
 - Added a built-in storage reset to prevent having to break the robot in order to run autoSpread or autoTier more than once.
 - Added an uninstall script.
-- Code is a LOT cleaner and more organized, just look at this README
-- It is no longer the code's fault if any of the programs crash.
+- Code is a LOT cleaner and more organized, just look at this README.
+- It is no longer the code's fault if any of the programs crash (probably).
 
 ![Giant Sword](media/Giant_Sword.png?)

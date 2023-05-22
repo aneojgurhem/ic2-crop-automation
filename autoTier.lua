@@ -35,7 +35,8 @@ local function updateLowest()
                 lowestTier = crop.tier
                 lowestTierSlot = slot
 
-            elseif config.stateWhileTiering and crop.tier == lowestTier then
+            -- Find lowest stat slot amongst the lowest tier
+            elseif (config.stateWhileTiering and (crop.tier == lowestTier)) then
                 local stat = crop.gr + crop.ga - crop.re
                 if stat < lowestStat then
                     lowestStat = stat
@@ -68,7 +69,7 @@ local function checkChild(slot, crop)
                 database.updateFarm(lowestTierSlot, crop)
                 updateLowest()
 
-            elseif (config.statWhileTiering and crop.tier == lowestTier and stat > lowestStat) then
+            elseif (config.statWhileTiering and (crop.tier == lowestTier) and (stat > lowestStat)) then
                 action.transplant(posUtil.workingSlotToPos(slot), posUtil.workingSlotToPos(lowestStatSlot))
                 action.placeCropStick(2)
                 database.updateFarm(lowestStatSlot, crop)
@@ -105,8 +106,8 @@ local function tierOnce()
     for slot=1, config.workingFarmArea, 1 do
 
         -- Terminal Condition
-        if (breedRound > config.maxBreedRound) then
-            print('autoTier: Max Round Reached!')
+        if breedRound > config.maxBreedRound then
+            print('autoTier: Max Breeding Round Reached!')
             return false
         end
 
@@ -146,6 +147,8 @@ local function init()
     database.scanFarm()
     action.restockAll()
     updateLowest()
+
+    print(string.format('autoTier: Target Tier %s', config.autoTierThreshold))
 end
 
 
