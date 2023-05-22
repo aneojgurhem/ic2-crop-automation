@@ -36,7 +36,7 @@ local function updateLowest()
                 lowestTierSlot = slot
 
             -- Find lowest stat slot amongst the lowest tier
-            elseif (config.stateWhileTiering and (crop.tier == lowestTier)) then
+            elseif (config.statWhileTiering and crop.tier == lowestTier) then
                 local stat = crop.gr + crop.ga - crop.re
                 if stat < lowestStat then
                     lowestStat = stat
@@ -69,7 +69,8 @@ local function checkChild(slot, crop)
                 database.updateFarm(lowestTierSlot, crop)
                 updateLowest()
 
-            elseif (config.statWhileTiering and (crop.tier == lowestTier) and (stat > lowestStat)) then
+            -- Not higher tier, stat up working farm
+            elseif (config.statWhileTiering and crop.tier == lowestTier and stat > lowestStat) then
                 action.transplant(posUtil.workingSlotToPos(slot), posUtil.workingSlotToPos(lowestStatSlot))
                 action.placeCropStick(2)
                 database.updateFarm(lowestStatSlot, crop)
