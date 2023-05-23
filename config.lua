@@ -15,21 +15,30 @@ local config = {
     -- Whether or not to stat-up crops during autoTier (Very Slow)
     statWhileTiering = false,
 
-    -- Maximum Growth Stat
-    maxGrowth = 21,
-    -- Maximum Resistance Stat
-    maxResistance = 2,
-
     -- Minimum tier for the working farm during autoTier
     autoTierThreshold = 13,
+    -- Maximum Growth during autoTier
+    autoTierMaxGrowth = 21,
+    -- Maximum Resistance during autoTier
+    autoTierMaxResistance = 2,
+
     -- Minimum Gr + Ga - Re for the working farm during autoStat (21 + 31 - 0 = 52)
     autoStatThreshold = 52,
-    -- Minimum Gr + Ga - Re for the storage farm during autoSpread (21 + 31 - 0 = 52)
-    autoSpreadThreshold = 46,
+    -- Maximum Growth during autoStat
+    autoStatMaxGrowth = 21,
+    -- Maximum Resistance during autoStat
+    autoStatMaxResistance = 2,
+
+    -- Minimum Gr + Ga - Re for the storage farm during autoSpread (23 + 31 - 0 = 54)
+    autoSpreadThreshold = 48,
+    -- Maximum Growth during autoSpread
+    autoSpreadMaxGrowth = 23,
+    -- Maximum Resistance during autoSpread
+    autoSpreadMaxResistance = 2,
 
     -- Minimum Charge Level
     needChargeLevel = 0.2,
-    -- Max breed round before termination. Set to nil for infinite loop
+    -- Max breed round before termination of autoTier. Set to nil for infinite loop
     maxBreedRound = 1000,
 
     -- =========== DO NOT CHANGE ===========

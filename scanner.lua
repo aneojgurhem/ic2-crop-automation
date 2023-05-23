@@ -35,17 +35,6 @@ local function scan()
     end
 end
 
-
-local function isWeed(crop)
-    return crop.name == 'weed' or
-        crop.name == 'Grass' or
-        crop.gr > config.maxGrowth or
-        crop.re > config.maxResistance or
-        (crop.name == 'venomilia' and crop.gr > 7)
-end
-
-
 return {
-    scan = scan,
-    isWeed = isWeed
+    scan = scan
 }
