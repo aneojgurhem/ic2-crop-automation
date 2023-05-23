@@ -55,7 +55,7 @@ Lastly, you need a Transvector Binder and Transvector Dislocator which requires 
 
 First off, it is recommended to set everything up in a Jungle or Swamp biome at Y=130 as that will give you the highest humidity and air quality stats. This is most easily done in a personal dimension which you earn as a quest reward from reaching the moon. Do not place any solid blocks above the farm as that will reduce the air quality. All of the machines on the surface are waterproof so do not worry about the rain. Use vanilla dirt because that will allow you to grow crops that require a particular block underneath, and boost the nutrient stat of your crops. The whole farm can easily fit into a single chunk for easy chunk loading.
 
-You may change both the size of the working farm and the size of the storage farm in the config (default is 6x6 and 9x9, respectively). Larger working farm sizes will extend left and up while larger storage farm sizes will extend down and to the right (see image below). The top row of the working farm will always align with the top row of the storage farm. There is no maximum or minimum size for either farm and it does not matter if the lengths are even or odd. Note that larger storage farm sizes will leave your working farm more susceptible to weeds because the robot will have to travel further when transporting crops which means less time spent scanning the working farm. 
+You may change both the size of the working farm and the size of the storage farm in the config (default is 6x6 and 9x9, respectively). Larger working farm sizes will extend left and up while larger storage farm sizes will extend down and to the right (see image below). The top row of the working farm will always align with the top row of the storage farm. There is no maximum or minimum size for either farm and it does not matter if the lengths are even or odd. Note that larger storage farm sizes will leave your working farm more susceptible to weeds because the robot will have to travel further when transporting crops which means less time spent scanning the working farm. Changing anything in the config, including these sizes, requires you to restart your robot.
 
 ![Farm Top](media/Farm_Top.png?)
 
@@ -81,7 +81,7 @@ The second program is autoStat. This will automatically stat-up your crops, term
 
     autoStat
 
-The third program is autoSpread. This will automatically spread (duplicate) your crops if each new Gr + Ga - Re is at least 49 (configurable), terminating once the storage farm is full. A trash can is recommended for this program. Maximum growth and resistance are also configurable options which default to 23 and 2, respectively. To run, simply enter:
+The third program is autoSpread. This will automatically spread (duplicate) your crops if each new Gr + Ga - Re is at least 50 (configurable), terminating once the storage farm is full. A trash can is recommended for this program. Maximum growth and resistance are also configurable options which default to 23 and 2, respectively. When filling a parent slot on the working farm, the robot will follow the autoStat maximum growth and resistance instead. To run, simply enter:
 
     autoSpread
 
