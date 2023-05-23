@@ -81,7 +81,7 @@ The second program is autoStat. This will automatically stat-up your crops, term
 
     autoStat
 
-The third program is autoSpread. This will automatically spread (duplicate) your crops if each new Gr + Ga - Re is at least 46 (configurable), terminating once the storage farm is full. A trash can is recommended for this program. Maximum growth and resistance are also configurable options which default to 21 and 2, respectively. To run, simply enter:
+The third program is autoSpread. This will automatically spread (duplicate) your crops if each new Gr + Ga - Re is at least 49 (configurable), terminating once the storage farm is full. A trash can is recommended for this program. Maximum growth and resistance are also configurable options which default to 23 and 2, respectively. To run, simply enter:
 
     autoSpread
 

@@ -48,7 +48,7 @@ local function checkChild(slot, crop)
             if stat >= config.autoSpreadThreshold then
 
                 -- Make sure no parent on the working farm is empty
-                if findEmpty() then
+                if findEmpty() and crop.gr <= config.autoStatMaxGrowth then
                     action.transplant(posUtil.workingSlotToPos(slot), posUtil.workingSlotToPos(emptySlot))
                     action.placeCropStick(2)
                     database.updateFarm(emptySlot, crop)

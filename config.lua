@@ -30,7 +30,7 @@ local config = {
     autoStatMaxResistance = 2,
 
     -- Minimum Gr + Ga - Re for the storage farm during autoSpread (23 + 31 - 0 = 54)
-    autoSpreadThreshold = 48,
+    autoSpreadThreshold = 50,
     -- Maximum Growth during autoSpread
     autoSpreadMaxGrowth = 23,
     -- Maximum Resistance during autoSpread
@@ -56,7 +56,7 @@ local config = {
 
     -- The slot for spade
     spadeSlot = 0,
-    -- The slot for binder for the transvector dislocator
+    -- The slot for the transvector binder
     binderSlot = -1,
     -- The slot for crop sticks
     stickSlot = -2,
