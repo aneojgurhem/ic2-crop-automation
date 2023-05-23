@@ -50,6 +50,11 @@ local function checkChild(slot, crop)
                     database.addToStorage(crop)
                     action.placeCropStick(2)
                 end
+
+            -- Stats are not high enough
+            else
+                action.deweed()
+                action.placeCropStick()
             end
 
         elseif config.keepMutations and (not database.existInStorage(crop)) then
