@@ -41,8 +41,8 @@ end
 local function isWeed(crop)
     return crop.name == 'weed' or
         crop.name == 'Grass' or
-        crop.gr > config.autoStatMaxGrowth or
-        crop.re > config.autoStatMaxResistance or
+        crop.gr > config.workingMaxGrowth or
+        crop.re > config.workingMaxResistance or
         (crop.name == 'venomilia' and crop.gr > 7)
 end
 

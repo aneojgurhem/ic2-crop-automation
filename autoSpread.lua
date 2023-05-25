@@ -27,8 +27,8 @@ end
 local function isWeed(crop)
     return crop.name == 'weed' or
         crop.name == 'Grass' or
-        crop.gr > config.autoSpreadMaxGrowth or
-        crop.re > config.autoSpreadMaxResistance or
+        crop.gr > config.storageMaxGrowth or
+        crop.re > config.storageMaxResistance or
         (crop.name == 'venomilia' and crop.gr > 7)
 end
 
@@ -48,7 +48,7 @@ local function checkChild(slot, crop)
             if stat >= config.autoSpreadThreshold then
 
                 -- Make sure no parent on the working farm is empty
-                if findEmpty() and crop.gr <= config.autoStatMaxGrowth then
+                if findEmpty() and crop.gr <= config.workingMaxGrowth and crop.re <= config.workingMaxResistance then
                     action.transplant(posUtil.workingSlotToPos(slot), posUtil.workingSlotToPos(emptySlot))
                     action.placeCropStick(2)
                     database.updateFarm(emptySlot, crop)
