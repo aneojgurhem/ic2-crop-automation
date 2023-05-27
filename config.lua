@@ -8,11 +8,11 @@ local config = {
 
     -- Once complete, remove all extra crop sticks to prevent the working farm from weeding
     cleanUp = true,
-    -- Utilize storage chest (Don't Change)
+    -- Pickup any and all drops (don't change)
     keepDrops = true,
-    -- Keep crops that are not the recognized target crop during autoSpread and autoStat
+    -- Keep crops that are not the target crop during autoSpread and autoStat
     keepMutations = false,
-    -- Whether or not to stat-up crops during autoTier (Very Slow)
+    -- Stat-up crops during autoTier (Very Slow)
     statWhileTiering = false,
 
     -- Minimum tier for the working farm during autoTier

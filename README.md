@@ -77,15 +77,15 @@ The first program is autoTier. This will automatically tier-up your crops, termi
 
     autoTier
 
-The second program is autoStat. This will automatically stat-up your crops, terminating once Gr + Ga - Re is at least 52 (configurable) for all crops on the working farm. A trash can is recommended for this program. Maximum growth and resistance are also configurable options which default to 21 and 2, respectively. To run, simply enter:
+The second program is autoStat. This will automatically stat-up your crops, terminating once Gr + Ga - Re is at least 52 (configurable) for all crops on the working farm. A trash can is recommended for this program. Maximum growth and resistance for parent crops are also configurable parameters which default to 21 and 2, respectively. To run, simply enter:
 
     autoStat
 
-The third program is autoSpread. This will automatically spread (duplicate) your crops if each new Gr + Ga - Re is at least 50 (configurable), terminating once the storage farm is full. A trash can is recommended for this program. Maximum growth and resistance are also configurable options which default to 23 and 2, respectively. When filling a parent slot on the working farm, the robot will follow the autoStat maximum growth and resistance instead. To run, simply enter:
+The third program is autoSpread. This will automatically spread (duplicate) your crops if each new Gr + Ga - Re is at least 50 (configurable), terminating once the storage farm is full. A trash can is recommended for this program. Maximum growth and resistance for new (child) crops are also configurable parameters which default to 23 and 2, respectively. To run, simply enter:
 
     autoSpread
 
-Fire and Forget. If you have brand new crops (ie. 1/1/1 spruce saplings) and want to automatically stat-up and start spreading. keepMutations in the config should be set to false (default), otherwise the storage farm will be overwritten once autoSpread begins. To run, simply enter:
+Fire and Forget. If you have brand new crops (ie. 1/1/1 spruce saplings) and want to automatically stat-up and start spreading. Note that keepMutations in the config should probably be set to false (default), otherwise the storage farm will be overwritten once autoSpread begins. To run, simply enter:
 
     autoStat && autoSpread
 
@@ -102,6 +102,12 @@ To remove any one file installed on the robot, enter
 To uninstall all of the files from this repo, enter
 
     uninstall
+
+To view an entire message regardless of how long it may be, enter
+
+    <program> 2>/errors.log
+
+    edit /errors.log
 
 ## Recommended Crops
 
