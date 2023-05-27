@@ -103,7 +103,7 @@ To uninstall all of the files from this repo, enter
 
     uninstall
 
-To view an entire message regardless of how long it may be, enter
+To view an entire error message regardless of how long it may be, enter
 
     <program> 2>/errors.log
 
