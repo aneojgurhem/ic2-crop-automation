@@ -24,7 +24,7 @@ Obtaining these components will require access to EV circuits and epoxid (late H
 - EEPROM (Lua BIOS)
 - OpenOS Floppy Disk
 
-![Robot Inventory](media/Robot_Components.png?)
+![Robot Components](media/Robot_Components.png?)
 
 Lastly, you need a Transvector Binder and Transvector Dislocator which requires some progression in Thaumcraft. Neither are very difficult to craft even if you have yet to start Thaumcraft. In the thaumonomicon, Transvector Dislocator can be found under "Thaumic Tinkerer" which requires both Transvector Interface and Smokey Quartz on the same tab. You will also need to complete research on Mirror Magic under "Artifice." For more information regarding Thaumcraft research, visit https://gtnh.miraheze.org/wiki/Thaumcraft_Research_Cheatsheet.
 
@@ -60,6 +60,8 @@ First off, it is recommended to set everything up in a Jungle or Swamp biome at 
 You may change both the size of the working farm and the size of the storage farm in the config (default is 6x6 and 9x9, respectively). Larger working farm sizes will extend left and up while larger storage farm sizes will extend down and to the right (see image below). The top row of the working farm will always align with the top row of the storage farm. There is no maximum or minimum size for either farm and it does not matter if the lengths are even or odd. Note that larger storage farm sizes will leave your working farm more susceptible to weeds because the robot will have to travel further when transporting crops which means less time spent scanning the working farm. Also note that the maximum range for the transvector dislocator is 16 blocks. Changing anything in the config, including these sizes, requires you to restart your robot.
 
 ![Farm Top](media/Farm_Top.png?)
+
+![Farm Side](media/Farm_Side.png?)
 
 First note the orientation of the robot sitting atop the OC charger. It must face up towards the right-most column of the working farm. The crop stick chest directly next to the charger can be a few things: any sort of chest, a JABBA barrel, or storage drawer (orientation does not matter). If the crop stick chest is ever empty, bad things will happen. In the image, I have a trash can on the other side of the crop stick chest because I do not want any drops beyond the target crop, but this can be a second chest if you do want random drops. On the same y-level as all of the chests, the transvector dislocator sits facing the top of the blank farmland (where a crop would go). Think of this as a buffer between the working and storage farms. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops to help them grow a little faster.
 
