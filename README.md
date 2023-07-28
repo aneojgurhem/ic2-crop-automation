@@ -1,6 +1,6 @@
 # Introduction
 
-These Open Computers (OC) scripts will automatically tier-up, stat-up, and spread (duplicate) crops for you. Open Computers is a very powerful yet complicated mod using custom scripts, but fear not. I have made everything here as straight forward as possible to help you get your crop bot running in no time.
+These Open Computers (OC) scripts will automatically tier-up, stat-up, and spread (duplicate) crops for you. Open Computers is a very powerful yet complicated mod using custom scripts, but fear not. I have made everything here as straightforward as possible to help you get your crop bot running in no time.
 
 # Bare Minimum Components
 
@@ -9,27 +9,29 @@ Obtaining these components will require access to EV circuits and epoxid (late H
 - OC Electronics Assembler
 - OC Charger
 - Tier 3 Computer Case
-- Central Processing Unit (Tier 2)
-- Graphics Card (Tier 1)
-- Redstone Card (Tier 1)
+- Tier 2 Central Processing Unit
+- Tier 2 Memory
+- Tier 1 Graphics Card
+- Tier 1 Redstone Card
+- Tier 1 Hard Disk Drive
+- Tier 1 Screen
+- Geolyzer
+- Keyboard
+- Disk Drive (Block)
 - Internet Card
-- Memory (Tier 2)
-- EEPROM (Lua BIOS)
-- Hard Disk Drive (Tier 1, 1MB)
 - Inventory Controller Upgrade
 - Inventory Upgrade
-- Screen (Tier 1)
-- Keyboard
-- Geolyzer
-- Disk Drive
-- OpenOS (Operating System)
+- EEPROM (Lua BIOS)
+- OpenOS Floppy Disk
 
-Lastly, you need a Transvector Binder and Transvector Dislocator which requires some progression in Thaumcraft. However, it is not too deep and completely doable if you are already able to make EV circuits and epoxid. Transvector Dislocator can be found under "Thaumic Tinkerer" and requires the following prerequisites on the same tab: Transvector Interface and Smokey Quartz. You will also need to complete research on Mirror Magic under "Artifice." For more information, visit https://gtnh.miraheze.org/wiki/Thaumcraft_Research_Cheatsheet.
+![Robot Inventory](media/Robot_Components.png?)
+
+Lastly, you need a Transvector Binder and Transvector Dislocator which requires some progression in Thaumcraft. Neither are very difficult to craft even if you have yet to start Thaumcraft. In the thaumonomicon, Transvector Dislocator can be found under "Thaumic Tinkerer" which requires both Transvector Interface and Smokey Quartz on the same tab. You will also need to complete research on Mirror Magic under "Artifice." For more information regarding Thaumcraft research, visit https://gtnh.miraheze.org/wiki/Thaumcraft_Research_Cheatsheet.
 
 # Building the Robot
 
 1. Insert the computer case into the OC Electronics Assembler which can be powered directly by any GT cable
-2. Shift-click all of the parts into the computer case except the OpenOS floppy disk
+2. Shift-click all of the bare minimum components into the computer case except the OpenOS floppy disk
 3. Click assemble and wait until it completes
 4. Rename the robot in an anvil
 5. Place the robot down on the OC Charger which can also be powered directly by any GT cable
@@ -63,7 +65,7 @@ First note the orientation of the robot sitting atop the OC charger. It must fac
 
 The location of the water is completely flexible: they do not have to be in the same locations as in the photo (underneath all five sea lantern slabs) and you can have as many as you would like on both the working farm and storage farm. However, there MUST be a block on top of each water and no two can be next to each other. The block can be literally anything, even a lily pad will work, so long as there is something. It is also possible to use garden soil or fertilized dirt and have absolutely no water on the farms at all, but this will sacrifice a few nutrient stats and bar you from growing crops that require a particular block underneath.
 
-The starting crops must be placed manually in the checkerboard pattern seen in the photo. This layout goes for all three programs. If you cannot fill the entire checkerboard to start, the absolute minimum required is two (one as the target crop and the other next to it for crossbreeding). It is not necessary to place empty crop sticks to fill the rest of the checkerboard. The target crop is used by autoStat and autoSpread to identify the crop you want to stat-up or spread to the storage farm, respectively.
+The starting crops must be placed manually in the checkerboard pattern seen in the photo. This layout goes for all three programs. If you cannot fill the entire checkerboard to start, the absolute minimum required is two (one as the target crop and the other next to it for crossbreeding). Even worse, if you have just a single seed of a particular crop, it is possible to start with a different crop next to it for crossbreeding (ie. Stickreed). It is not necessary to place empty crop sticks to fill the rest of the checkerboard. The target crop is used by autoStat and autoSpread to identify the crop you want to stat-up or spread to the storage farm, respectively.
 
 ![Farm Bottom](media/Farm_Bottom.png?)
 
@@ -113,14 +115,14 @@ To view an entire error message regardless of how long it may be, enter
 
 For starters, I recommend statting-up and spreading the following crops because their outputs are useful and not completely overshadowed by bees. Note that every crop has a higher chance of being discovered with specific parent combinations, but it is often easier to discover a crop from crossbreeding at the same tier. For example, diareed apparently has the highest chance of being discovered when the parents are oilberry and bobsyeruncleranks, BUT I recommend just running autoTier with all Tier 12 crops (or autoSpread with keepMutations on in the config). Crops that require a particular block underneath do not need to be fully grown in order to spread. For a full list of crops and their requirements, visit https://gtnh.miraheze.org/wiki/IC2_Crops_List.
 
-- Stickreed for discovering other crops and sticky resin (rubber dust)
+- Stickreed for sticky resin and discovering/breeding with other crops
 - Spruce Bonsai for all of your benzene and power needs
-- Glowing Earth Coral for sunnarium and glowstone (gold and redstone)
 - Sugarbeet for sugar (oxygen)
+- Salty root OR Tearstalks for salt (sodium and chlorine)
+- Enderbloom for enderpearls and endereyes
+- Glowing Earth Coral for sunnarium and glowstone (gold and redstone)
 - Rape for seed oil
 - Goldfish plant for fish oil
-- Salty root for salt (chlorine and sodium)
-- Enderbloom for enderpearls/endereyes
 - Diareed for diamonds
 - Bobsyeruncleranks for emeralds
 
