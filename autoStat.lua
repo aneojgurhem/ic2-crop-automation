@@ -100,6 +100,12 @@ local function statOnce()
     for slot=1, config.workingFarmArea, 1 do
 
         -- Terminal Condition
+        if #database.getStorage() >= config.storageFarmArea then
+            print('autoStat: Storage Full!')
+            return false
+        end
+
+        -- Terminal Condition
         if lowestStat >= config.autoStatThreshold then
             print('autoStat: Minimum Stat Threshold Reached!')
             return false
