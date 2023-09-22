@@ -89,6 +89,8 @@ Fire and Forget. If you have brand new crops (ie. 1/1/1 spruce saplings) and wan
 
     autoStat && autoSpread
 
+Changing anything in the config requires you to restart your robot.
+
 ## Other Helpful Commands
 
 To list all of the files installed on the robot, enter
