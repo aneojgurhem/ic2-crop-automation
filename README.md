@@ -45,7 +45,7 @@ Lastly, you need a Transvector Binder and Transvector Dislocator which requires 
 
         edit config.lua
 
-10. Place the Spade and Transvector Binder into the last and second to last slot of the robot, respectively. Crop sticks will go in the third, but it is not required to put them in yourself. An axe or mattock can also be placed into the tool slot of the robot (optional) to speed up destroying crops. See image below.
+10. Place the Spade and Transvector Binder into the last and second to last slot of the robot, respectively. Crop sticks will go in the third, but it is not required to put them in yourself. An axe or mattock can also be placed into the tool slot of the robot to speed up destroying crops (optional). See image below.
 
 ![Robot Inventory](media/Robot_Inventory.png?)
 
