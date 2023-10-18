@@ -25,6 +25,13 @@ local function updateLowest()
                 lowestStatSlot = slot
                 break
 
+            elseif crop.name ~= targetCrop then
+                local stat = crop.gr + crop.ga - crop.re - 2
+                if stat < lowestStat then
+                    lowestStat = stat
+                    lowestStatSlot = slot
+                end
+
             else
                 local stat = crop.gr + crop.ga - crop.re
                 if stat < lowestStat then
