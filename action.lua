@@ -18,7 +18,7 @@ end
 
 
 local function fullyCharged()
-    return computer.energy() / computer.maxEnergy() > 0.99
+    return computer.energy() / computer.maxEnergy() > 0.9
 end
 
 

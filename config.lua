@@ -34,7 +34,7 @@ local config = {
     -- Minimum Charge Level
     needChargeLevel = 0.2,
     -- Max breed round before termination of autoTier.
-    maxBreedRound = 1000,
+    maxBreedRound = 10,
 
     -- =========== DO NOT CHANGE ===========
 

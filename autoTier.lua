@@ -122,6 +122,16 @@ local function checkParent(slot, crop)
     end
 end
 
+-- =============== DICTIONNARY ======================
+
+local function dictToString(d)
+    s = ""
+    for k, v in pairs(d) do
+        s = s..k..toString(v)
+    end
+    return s
+end
+
 -- =================== TIERING ======================
 
 local function tierOnce()
@@ -148,6 +158,7 @@ local function tierOnce()
         -- Scan
         gps.go(posUtil.workingSlotToPos(slot))
         local crop = scanner.scan()
+        print(breedRound, slot, dictToString(crop))
 
         if slot % 2 == 0 then
             checkChild(slot, crop)

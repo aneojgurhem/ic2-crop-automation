@@ -13,6 +13,7 @@ local scripts = {
     'autoTier.lua',
     'autoSpread.lua',
     'config.lua',
+    'turn.lua',
     'uninstall.lua'
 }
 
